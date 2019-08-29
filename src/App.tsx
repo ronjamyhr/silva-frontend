@@ -6,6 +6,7 @@ import Home from './components/home/Home';
 import Footer from './components/footer/Footer';
 import Contact from './components/contact/Contact'
 import NotFound from './components/not-found/Not-found';
+import Booking from './components/booking/Booking';
 
 class App extends React.Component {
 	public render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
 								<Home />
 							</React.Fragment>
 						)}></Route>
+                        <Route path="/booking" component={Booking} />
 						<Route path="/contact" component={Contact} />
 						<Route component={ NotFound } />
 					</Switch>
