@@ -7,7 +7,7 @@ class Booking extends React.Component {
 		return (
 			<div className="container">
                 <div className="headline">
-                    <h2>Boka bord</h2>
+                    <h1>Boka bord</h1>
                 </div>
                 <div className="form-container">
                     <SearchDate/>
