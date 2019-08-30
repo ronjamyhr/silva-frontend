@@ -7,8 +7,10 @@ import Footer from './components/footer/Footer';
 import Contact from './components/contact/Contact'
 import NotFound from './components/not-found/Not-found';
 import Booking from './components/booking/Booking';
+import Admin from './components/admin/Admin';
 
 class App extends React.Component {
+
 	public render() {
 		return (
 		    <div className="App">
@@ -22,6 +24,7 @@ class App extends React.Component {
 						)}></Route>
                         <Route path="/booking" component={Booking} />
 						<Route path="/contact" component={Contact} />
+						<Route path="/admin" component={Admin} />
 						<Route component={ NotFound } />
 					</Switch>
 				</Router>
