@@ -52,3 +52,15 @@ html {
 * :before, *:after {
   box-sizing: inherit;
 }
+h1 {
+	font-size: 4rem;
+	font-family: Raleway;
+	font-weight: 300;
+}
+h2 {
+	font-size: 1.5rem;
+    font-family: Raleway;
+}
+p {
+    font-family: Raleway;
+}
