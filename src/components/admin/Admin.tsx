@@ -18,7 +18,7 @@ export interface IBookings {
 	bookings: IBooking[];
 }
 
-class Admin extends React.Component {
+class Admin extends React.Component<{}, IBookings> {
 	state = {
 		bookings: [
 			{
@@ -70,7 +70,7 @@ class Admin extends React.Component {
 
 				<Search mapBookings={this.mapBookings}/>
 
-				<Bookings/>
+				<Bookings bookingsOnTime={this.state.bookings}/>
                 
 			</div>
 		);

@@ -1,8 +1,12 @@
 import React from 'react';
 import './Bookings.css';
-import IBookings from './../Admin';
+import { IBooking } from './../Admin';
 
-class Bookings extends React.Component<{}> {
+interface IBookingsProps {
+	bookingsOnTime: IBooking[];
+}
+
+class Bookings extends React.Component<IBookingsProps, {}> {
 
 	constructor(props: any){
 		super(props);
