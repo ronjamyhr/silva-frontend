@@ -7,15 +7,21 @@ class SearchDate extends React.Component {
 			<form className="search-date-form">
                 <label htmlFor="date">Vilken dag vill ni boka?</label>
                 <input type="date" id="date" min="2019-08-29"/> 
-                <p>Vilken tid vill ni äta?</p>
+                <h3>Vilken tid vill ni äta?</h3>
                 <div className="checkbox-container">
                     <div className="checkbox-left">
-                        <input type="checkbox" value="18" id="time18"/>
-                        <label htmlFor="time18">18</label>
+                        <label htmlFor="time18" className="checkbox-label">
+                            <input type="checkbox" id="time18" value="18"/>
+                            <span>18</span>
+                        </label>
+                       
                     </div>
                     <div className="checkbox-right">
-                        <input type="checkbox" value="21" id="time21"/>
-                        <label htmlFor="time21">21</label>
+                        <label htmlFor="time21" className="checkbox-label">
+                            <input type="checkbox" id="time21" value="time21"/>
+                            <span>21</span>
+                        </label>
+                       
                     </div>
                 </div>
                 
