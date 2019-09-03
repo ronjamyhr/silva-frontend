@@ -36,14 +36,14 @@ class Admin extends React.Component<{}, IBookings> {
 		super(props);
 		this.getBookings = this.getBookings.bind(this);
 		this.mapBookings = this.mapBookings.bind(this);
-		this.getBookings();
 	}
 
-	getBookings() {
+	getBookings(date: string, time: Number) {
 		// Set correct path in config-url.js
 		axios.get(`http://${urlPath}/silva-backend/api/booking/get-bookings.php
 		`)
       .then(res => {
+		this.mapBookings(date, time);
 		this.setState({
 			 bookings: res.data
 		});
@@ -52,8 +52,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	mapBookings(date: string, time: Number) {
 		let mappedBookings: any = [];
-		this.state.bookings.map( (item) => {
-			console.log(typeof(item.booking_id));
+		this.state.bookings.map( item => {
 			if(date === item.booking_date && time === item.sitting_time){
 				mappedBookings.push(item);
 			}
@@ -61,6 +60,7 @@ class Admin extends React.Component<{}, IBookings> {
 		this.setState({
 			bookings: mappedBookings
 		});
+		console.log(mappedBookings);
 		console.log(this.state.bookings);
 	}
 
@@ -68,7 +68,7 @@ class Admin extends React.Component<{}, IBookings> {
 		return (
 			<div>
 
-				<Search mapBookings={this.mapBookings}/>
+				<Search getBookings={this.getBookings}/>
 
 				<Bookings bookingsOnTime={this.state.bookings}/>
                 
