@@ -1,0 +1,68 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1c2329;
+    height: 80px;
+    padding: 0.5em;
+}
+
+.medium-logo {
+    width: 50px;
+}
+
+.navigation {
+    list-style: none;
+    text-transform: uppercase;
+    display: flex;
+}
+
+.navigation .links {
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: Raleway;
+    padding: 0.5em;
+    font-size: 0.9rem;
+}
+
+.navigation .links:hover {
+    text-decoration: underline;
+    color: #2d3f4d;
+}
+
+@media (min-width: 768px) {
+
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 65px;
+    }
+
+    .medium-logo {
+        align-self: left;
+        margin-left: 0.4em;
+    }
+
+    .navigation {
+        display: flex;
+        align-self: right;
+        margin-right: 0.5em;
+    }
+
+    .navigation .links {
+        display: block;
+    }
+
+}
+
+@media (min-width: 992px) {
+
+    .navbar {
+        height: 60px;
+    }
+
+}
