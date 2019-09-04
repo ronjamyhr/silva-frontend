@@ -12,11 +12,7 @@
 }
 
 .big-logo {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 180px;
+    display: none;
 }
 
 .home-container {
@@ -30,7 +26,6 @@
     flex-direction: column;
     align-items: center;
     height: 300px;
-    ;
 }
 
 .about-us-header {
@@ -42,7 +37,7 @@
 .about-menu-text,
 .about-booking-text {
     text-align: center;
-    padding: 0 3em 0.5em 3em;
+    padding: 0.5em 3em 0.5em 3em;
     width: 300px;
 }
 
@@ -115,8 +110,8 @@
 }
 
 .gallery-item {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     margin: 0.2em;
     box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
     overflow: hidden;
@@ -142,11 +137,20 @@
     object-fit: cover;
 }
 
-
 @media (min-width: 768px) {
 
     .big-logo {
+        display: block;
+        position: absolute;
+        top: 14%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 180px;
+    }
+
+    .gallery-item {
         width: 200px;
+        height: 200px;
     }
 
 }
@@ -154,6 +158,7 @@
 @media (min-width: 992px) {
 
     .big-logo {
+        top: 17%;
         width: 250px;
     }
 
@@ -188,7 +193,7 @@
 
 
     .gallery-item {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
     }
 }
