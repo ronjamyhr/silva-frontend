@@ -37,9 +37,9 @@ class Search extends React.Component<IMapBookings> {
 		return (
 			<div>
                 <form className="search-date-form" onSubmit={this.handleSubmit}>
-                <label htmlFor="date">Vilken dag vill ni boka?</label>
+                <label htmlFor="date">Bokningar:</label>
                 <input type="date" id="date" min="2019-08-29" onChange={this.updateDate}/> 
-                <p>Vilken tid vill ni äta?</p>
+                <p>Tid:</p>
                 <div className="checkbox-container">
                     <div className="checkbox-left">
                         <input type="radio" value="18" id="time18" name="timeSearch" onChange={this.updateTime}

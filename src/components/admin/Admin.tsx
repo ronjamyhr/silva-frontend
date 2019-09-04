@@ -19,6 +19,14 @@ export interface IBookings {
 }
 
 class Admin extends React.Component<{}, IBookings> {
+
+	constructor(props: any) {
+		super(props);
+		this.getBookings = this.getBookings.bind(this);
+		this.mapBookings = this.mapBookings.bind(this);
+		this.deleteBooking = this.deleteBooking.bind(this);
+	}
+
 	state = {
 		bookings: [
 			{
@@ -32,27 +40,18 @@ class Admin extends React.Component<{}, IBookings> {
 		]
 	}
 
-	constructor(props: any) {
-		super(props);
-		this.getBookings = this.getBookings.bind(this);
-		this.mapBookings = this.mapBookings.bind(this);
-	}
-
 	getBookings(date: string, time: Number) {
 		// Set correct path in config-url.js
 		axios.get(`http://${urlPath}/silva-backend/api/booking/get-bookings.php
 		`)
       .then(res => {
-		this.mapBookings(date, time);
-		this.setState({
-			 bookings: res.data
-		});
+		this.mapBookings(date, time, res.data);
 	  })
 	}
 
-	mapBookings(date: string, time: Number) {
+	mapBookings(date: string, time: Number, res: any) {
 		let mappedBookings: any = [];
-		this.state.bookings.map( item => {
+		res.map( (item: any) => {
 			if(date === item.booking_date && time === item.sitting_time){
 				mappedBookings.push(item);
 			}
@@ -60,8 +59,22 @@ class Admin extends React.Component<{}, IBookings> {
 		this.setState({
 			bookings: mappedBookings
 		});
-		console.log(mappedBookings);
 		console.log(this.state.bookings);
+	}
+
+	deleteBooking(id: Number) {
+		axios.delete(`http://${urlPath}/silva-backend/api/booking/delete-booking.php
+		`, {
+            "data": {
+                "id": id
+            }
+         })
+		.then( () => {
+			console.log(id);
+			const prevBookings = this.state.bookings;
+			const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
+			this.setState({bookings: filteredBookings});
+		})
 	}
 
 	public render() {
@@ -70,7 +83,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 				<Search getBookings={this.getBookings}/>
 
-				<Bookings bookingsOnTime={this.state.bookings}/>
+				<Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking}/>
                 
 			</div>
 		);
