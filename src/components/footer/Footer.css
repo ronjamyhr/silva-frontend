@@ -1,5 +1,50 @@
 .footer {
     width: 100vw;
-    height: 300px;
-    background-color: black;
+    max-width: 100%;
+    height: 400px;
+}
+
+.top-footer {
+    background-color: #1c2329;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.facebook-icon-footer {
+    color: white;
+    margin-right: 0.5em;
+    font-size: 2em;
+}
+
+.instagram-icon-footer {
+    color: white;
+    margin-left: 0.5em;
+    font-size: 2em;
+}
+
+.bottom-footer {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.bottom-footer p {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+
+
+
+
+/*.footer-content-wrapper {
+    
+}*/
+
+.small-logo {
+    width: 150px;
+    height: auto;
 }
