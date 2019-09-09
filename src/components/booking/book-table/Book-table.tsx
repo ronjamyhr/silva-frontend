@@ -1,11 +1,20 @@
 import React from 'react';
 import './Book-table.css';
 
-class BookTable extends React.Component {
+interface IDateTime {
+	dateTime: IDateTimes[];
+}
+
+export interface IDateTimes {
+	choosenDate: string;
+	choosenTime: number;
+}
+
+class BookTable extends React.Component <IDateTime, {}> {
 	public render() {
 		return (
 			<div>
-			  	Not found
+			  	Book table komponenten
 			</div>
 		);
 	}
