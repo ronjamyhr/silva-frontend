@@ -9,20 +9,26 @@ import NotFound from './components/not-found/Not-found';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-
 describe('routes using memory router', () => {
+
   it('should show Home component for / router (using memory router)', () => {
+
     const component = mount( <MemoryRouter initialEntries = {['/']} >
         <App/>
       </MemoryRouter>
     );
     expect(component.find(Home)).toHaveLength(1);
+    
   });
+
   it('should show Not Found component for route not defined', () => {
+
     const component = mount( <MemoryRouter initialEntries = {['/unknown']} >
         <NotFound/>
       </MemoryRouter>
     );
     expect(component.find(NotFound)).toHaveLength(1);
+
   });
+
 });

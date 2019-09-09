@@ -45,6 +45,7 @@ class Admin extends React.Component<{}, IBookings> {
 		axios.get(`http://${urlPath}/silva-backend/api/booking/get-bookings.php
 		`)
       .then(res => {
+		console.log(res.data);
 		this.mapBookings(date, time, res.data);
 	  })
 	}
