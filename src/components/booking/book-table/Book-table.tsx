@@ -67,9 +67,10 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         console.log(customer.number_of_guests);
         console.log(customer.name);
 
-        axios.post(`http://${urlPath}/booking/register-customer-book-table.php`, customer)
+        axios.post(`http://${urlPath}/booking/register-customer-book-table.php`, JSON.stringify(customer))
         .then(result => {
             console.log(result);
+            console.log(result.data);
         })
         .catch(error => {
             console.log(error);
