@@ -48,6 +48,8 @@ class Booking extends React.Component<{}, IBookings> {
                 this.setState({
                     bookings: result.data
                 });
+            }).catch((error: any) => {
+                console.log(error);
             });
     }
 
@@ -73,8 +75,8 @@ class Booking extends React.Component<{}, IBookings> {
                         <div className="headline">
                             <h1>Boka bord</h1>
                         </div>
-                            {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
-                            {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime} /> : null}
+                        {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
+                        {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime} /> : null}
                     </div>
                 </main>
             </React.Fragment>

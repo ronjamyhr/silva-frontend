@@ -12,9 +12,10 @@ class Navbar extends React.Component {
 							title="Silva logo" />
 					</div>
 					<ul className="navigation">
-						<li><Link className="links" to="/">Hem</Link></li>
-						<li><Link className="links" to="/booking">Boka bord</Link></li>
-						<li><Link className="links" to="/contact">Kontakt</Link></li>
+						<li><Link className="links" to="/">hem</Link></li>
+						<li><Link className="links" to="/booking">boka bord</Link></li>
+						<li><Link className="links" to="/menu">meny</Link></li>
+						<li><Link className="links" to="/contact">kontakt</Link></li>
 					</ul>
 				</nav>
 			</React.Fragment>
