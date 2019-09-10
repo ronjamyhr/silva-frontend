@@ -3,11 +3,11 @@ import './Search-date.css';
 import { IBooking } from '../Booking';
 import moment from "moment";
 
-const dateOfToday  = moment().format('YYYY-MM-DD');
+const dateOfToday = moment().format('YYYY-MM-DD');
 
 interface IMapBookings {
     bookings: IBooking[];
-    timeSelected(date:string, thetime: number): void;
+    timeSelected(date: string, thetime: number): void;
 }
 
 interface IState {
@@ -69,9 +69,9 @@ class SearchDate extends React.Component<IMapBookings, IState> {
             }
         }
 
-        this.setState({ 
+        this.setState({
             firstSitting: firstSittingTime,
-            secondSitting: secondSittingTime 
+            secondSitting: secondSittingTime
         });
     }
 
@@ -84,46 +84,53 @@ class SearchDate extends React.Component<IMapBookings, IState> {
 
         if (!this.state.clicked) {
             return <div className="container-search">
-                <label htmlFor="date">Vilken dag vill ni boka?</label>
+                <h2 className="heading-date-time">Vilken dag vill ni boka?</h2>
                 <input onChange={this.updateDate} type="date" id="date" min={dateOfToday} />
             </div>
         }
 
         return (
-            <div className="container-search">
+            <React.Fragment>
+                <div className="container-search">
 
-                <label htmlFor="date">Vilken dag vill ni boka?</label>
-                <input onChange={this.updateDate} type="date" id="date" min={dateOfToday} />
+                    <h2 className="heading-date-time">Vilken dag vill ni boka?</h2>
+                    <input onChange={this.updateDate} type="date" id="date" min={dateOfToday} />
 
-                {this.state.firstSitting.length < 15 || this.state.firstSitting.length === null ? (
-                    <div className="checkbox-left">
-                        <label htmlFor="time18" className="checkbox-label">
-                            <input onChange={this.updateTime} type="checkbox" id="time18" value="18" />
-                            <span>18</span>
-                        </label>
+                    <h2 className="heading-date-time">Välj tid:</h2>
+                    <div className="checkbox-container">
+
+                        {this.state.firstSitting.length < 15 || this.state.firstSitting.length === null ? (
+                            <div className="checkbox-left">
+                                <label htmlFor="time18" className="checkbox-label">
+                                    <input onChange={this.updateTime} type="checkbox" id="time18" value="18" />
+                                    <span>18</span>
+                                </label>
+                            </div>
+                        ) : (
+                                null
+                            )}
+
+                        {this.state.secondSitting.length < 15 || this.state.secondSitting.length === null ? (
+                            <div className="checkbox-right">
+                                <label htmlFor="time21" className="checkbox-label">
+                                    <input onChange={this.updateTime} type="checkbox" id="time21" value="21" />
+                                    <span>21</span>
+                                </label>
+                            </div>
+                        ) : (
+                                null
+                            )}
+
+                        {this.state.firstSitting.length >= 15 && this.state.secondSitting.length >= 15 ? (
+                            <p>Alla tider är tyvärr fullbokade, välj ett annat datum</p>
+                        ) : (
+                                null
+                            )}
+
                     </div>
-                ) : (
-                        null
-                    )}
 
-                {this.state.secondSitting.length < 15 || this.state.secondSitting.length === null ? (
-                    <div className="checkbox-right">
-                        <label htmlFor="time21" className="checkbox-label">
-                            <input onChange={this.updateTime} type="checkbox" id="time21" value="21" />
-                            <span>21</span>
-                        </label>
-                    </div>
-                ) : (
-                        null
-                    )}
-
-                    {this.state.firstSitting.length >= 15 && this.state.secondSitting.length >= 15 ? (
-                        <p>Alla tider är tyvärr fullbokade, välj ett annat datum!</p>
-                    ) : ( 
-                        null
-                    )}
-
-            </div>
+                </div>
+            </React.Fragment>
         );
     }
 }

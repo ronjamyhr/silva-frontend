@@ -3,6 +3,7 @@ import './Booking.css';
 import SearchDate from './search-date/Search-date';
 import axios from 'axios';
 import BookTable from './book-table/Book-table';
+import urlPath from './../../config-url';
 
 export interface IBooking {
     booking_id: number,
@@ -42,7 +43,7 @@ class Booking extends React.Component<{}, IBookings> {
     }
 
     getBookings() {
-        axios.get('http://localhost:8888/api/booking/get-bookings.php')
+        axios.get(`http://${urlPath}/booking/get-bookings.php`)
             .then((result: any) => {
                 this.setState({
                     bookings: result.data
@@ -66,17 +67,17 @@ class Booking extends React.Component<{}, IBookings> {
 
     public render() {
         return (
-            <div className="container">
-                <div className="headline">
-                    <h1>Boka bord</h1>
-                </div>
-                <div className="form-container">
-                    {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
-                </div>
-                <div>
-                    {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime} /> : null}
-                </div>
-            </div>
+            <React.Fragment>
+                <main className="booking-main">
+                    <div className="booking-container">
+                        <div className="headline">
+                            <h1>Boka bord</h1>
+                        </div>
+                            {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
+                            {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime} /> : null}
+                    </div>
+                </main>
+            </React.Fragment>
         );
     }
 }
