@@ -18,7 +18,7 @@ class Home extends React.Component {
 					</article>
 					<section className="image-quote-section">
 						<div className="image-small-section">
-							<img className="small-image" src={require("./../../images/pork.jpg")} alt="A pork dish"
+							<img className="small-image" src={require("./../../images/pork.jpg")} alt="Pork dish"
 								title="Pork" />
 						</div>
 						<div className="quote-section">
@@ -28,24 +28,24 @@ class Home extends React.Component {
 					<article className="about-menu">
 						<h2 className="about-menu-header">Vår meny</h2>
 						<p className="about-menu-text">Vår meny varieras efter årstid. De bästa råvarona efter säsong och såklart finns det något för alla. Vår avsmakningsmeny beståd av tio mindre rätter som köksmästaren satt ihop på ett helt fantastiskt sätt.</p>
-						<Link className="menu-link" to="/booking">Se vår meny här</Link>
+						<Link className="menu-link" to="/menu">Se vår meny här</Link>
 					</article>
 					<section className="gallery-quote-section">
 						<div className="gallery-section">
 							<div className="gallery-item">
-								<img className="gallery-image" src={require("./../../images/meat.jpg")} alt="A meat dish"
+								<img className="gallery-image" src={require("./../../images/meat.jpg")} alt="Meat dish"
 									title="Meat" />
 							</div>
 							<div className="gallery-item">
-								<img className="gallery-image" src={require("./../../images/pasta.jpg")} alt="A pasta dish"
+								<img className="gallery-image" src={require("./../../images/pasta.jpg")} alt="Pasta dish"
 									title="Pasta" />
 							</div>
 							<div className="gallery-item">
-								<img className="gallery-image" src={require("./../../images/plate.jpg")} alt="A plate"
+								<img className="gallery-image" src={require("./../../images/plate.jpg")} alt="Plate"
 									title="Plate" />
 							</div>
 							<div className="gallery-item">
-								<img className="gallery-image" src={require("./../../images/fish.jpg")} alt="A fish dish"
+								<img className="gallery-image" src={require("./../../images/fish.jpg")} alt="Fish dish"
 									title="Fish" />
 							</div>
 						</div>
@@ -56,7 +56,7 @@ class Home extends React.Component {
 						<Link className="booking-link" to="/booking">Boka ditt bord här</Link>
 					</article>
 					<section className="image-large-section">
-						<img className="image-large" src={require("./../../images/restaurant.jpg")} alt="Image of the restaurant"
+						<img className="image-large" src={require("./../../images/restaurant.jpg")} alt="The restaurant"
 							title="Restaurant" />
 					</section>
 				</main>

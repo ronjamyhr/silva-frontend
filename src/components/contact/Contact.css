@@ -1,6 +1,7 @@
 .header-contact {
     height: 100vh;
     width: 100vw;
+    max-width: 100%;
     background-image: url('./../../images/contact.jpg');
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -9,6 +10,7 @@
     position: relative;
     text-align: center;
     color: white;
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
 }
 
 .heading-contact {

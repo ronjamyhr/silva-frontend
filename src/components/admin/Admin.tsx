@@ -6,10 +6,10 @@ import Bookings from './bookings/Bookings';
 import urlPath from './../../config-url';
 
 export interface IBooking {
-	booking_id: Number,
+	booking_id: number,
 	booking_date: string,
-	sitting_time: Number,
-	number_of_guests_at_table: Number,
+	sitting_time: number,
+	number_of_guests_at_table: number,
 	name_on_booking: string,
 	email_on_booking: string
 }
@@ -32,50 +32,64 @@ class Admin extends React.Component<{}, IBookings> {
 			{
 				booking_id: 0,
 				booking_date: '',
-				sitting_time: 0,
+				sitting_time: 18,
 				number_of_guests_at_table: 0,
 				name_on_booking: '',
 				email_on_booking: ''
 			}
 		]
+		
 	}
 
-	getBookings(date: string, time: Number) {
+	getBookings(date: string, time: number) {
 		// Set correct path in config-url.js
-		axios.get(`http://${urlPath}/silva-backend/api/booking/get-bookings.php
+		axios.get(`http://${urlPath}/api/booking/get-bookings.php
 		`)
       .then(res => {
-		console.log(res.data);
 		this.mapBookings(date, time, res.data);
 	  })
 	}
 
-	mapBookings(date: string, time: Number, res: any) {
+	mapBookings(date: string, time: number, res: any) {
 		let mappedBookings: any = [];
 		res.map( (item: any) => {
-			if(date === item.booking_date && time === item.sitting_time){
+			if(date == item.booking_date && time == item.sitting_time){
 				mappedBookings.push(item);
 			}
-		});
+			return item;
+		})
 		this.setState({
 			bookings: mappedBookings
 		});
-		console.log(this.state.bookings);
 	}
 
-	deleteBooking(id: Number) {
-		axios.delete(`http://${urlPath}/silva-backend/api/booking/delete-booking.php
+	deleteBooking(id: number) {
+		axios.delete(`http://${urlPath}/api/booking/delete-booking.php
 		`, {
             "data": {
                 "id": id
             }
          })
 		.then( () => {
-			console.log(id);
 			const prevBookings = this.state.bookings;
 			const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
 			this.setState({bookings: filteredBookings});
 		})
+	}
+
+	update(id: number) {
+		const mock = {
+			"id": id,
+			"date": "2019-09-21",
+			"time": 18,
+			"number_of_guests": 5,
+		};
+		axios.post(`http://${urlPath}/api/booking/update.php
+		`, JSON.stringify(mock)
+         )
+    	.then(function(response){
+        	console.log('saved successfully')
+		});
 	}
 
 	public render() {
@@ -84,7 +98,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 				<Search getBookings={this.getBookings}/>
 
-				<Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking}/>
+				<Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking} update={this.update}/>
                 
 			</div>
 		);

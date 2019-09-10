@@ -3,7 +3,7 @@ import './Search.css';
 
 
 interface IMapBookings {
-    getBookings(date: string, time: Number): any;
+    getBookings(date: string, time: number): any;
 }
 
 class Search extends React.Component<IMapBookings> {
@@ -29,8 +29,7 @@ class Search extends React.Component<IMapBookings> {
         this.setState({date: e.target.value});
     }
     updateTime(e: any) {
-        this.setState({time: e.target.value});
-        console.log(this.state.time);
+        this.setState({time: parseInt(e.target.value)});
     }
 
 	public render() {
