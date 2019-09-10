@@ -43,7 +43,7 @@ class Booking extends React.Component<{}, IBookings> {
     }
 
     getBookings() {
-        axios.get(`http://${urlPath}/api/booking/get-bookings.php`)
+        axios.get(`http://${urlPath}/booking/get-bookings.php`)
             .then((result: any) => {
                 this.setState({
                     bookings: result.data
@@ -76,10 +76,8 @@ class Booking extends React.Component<{}, IBookings> {
                         <div className="headline">
                             <h1>Boka bord</h1>
                         </div>
-                      
                             {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
                             {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime}/> : null}
-
                     </div>
                 </main>
             </React.Fragment>

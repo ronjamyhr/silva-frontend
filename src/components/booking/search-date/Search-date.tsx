@@ -2,8 +2,7 @@ import React from 'react';
 import './Search-date.css';
 import { IBooking } from '../Booking';
 import moment from "moment";
-
-const dateOfToday = moment().format('YYYY-MM-DD');
+import Calendar from 'react-calendar';
 
 interface IMapBookings {
     bookings: IBooking[];
@@ -11,11 +10,12 @@ interface IMapBookings {
 }
 
 interface IState {
-    date: string;
+    date: Date;
     firstSitting: any;
     secondSitting: any;
     dateList: any;
     clicked: boolean;
+    currentDate: Date;
 }
 
 class SearchDate extends React.Component<IMapBookings, IState> {
@@ -24,11 +24,12 @@ class SearchDate extends React.Component<IMapBookings, IState> {
         super(props);
 
         this.state = {
-            date: '',
+            date: new Date(),
             firstSitting: [],
             secondSitting: [],
             dateList: [],
-            clicked: false
+            clicked: false,
+            currentDate: new Date(Date.now())
         }
 
         this.updateDate = this.updateDate.bind(this);
@@ -36,9 +37,9 @@ class SearchDate extends React.Component<IMapBookings, IState> {
         this.updateTime = this.updateTime.bind(this);
     }
 
-    updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateDate = (e: any) => {
 
-        this.setState({ date: e.target.value }, this.isAvailable);
+        this.setState({ date: e }, this.isAvailable);
         this.setState({ clicked: true });
     }
 
@@ -52,7 +53,11 @@ class SearchDate extends React.Component<IMapBookings, IState> {
 
             const element = this.props.bookings[i];
 
-            if (element.booking_date === this.state.date) {
+            console.log('booking date i db: ', element.booking_date);
+            console.log('state date: ', this.state.date);
+
+
+            if (element.booking_date === moment(this.state.date).format("YYYY-MM-DD")) {
 
                 dateList.push(element.sitting_time);
                 this.setState({ dateList: element.sitting_time });
@@ -60,6 +65,7 @@ class SearchDate extends React.Component<IMapBookings, IState> {
         }
 
         for (let i = 0; i < dateList.length; i++) {
+
             if (dateList[i] == 18) {
                 firstSittingTime.push(dateList[i]);
             }
@@ -77,15 +83,17 @@ class SearchDate extends React.Component<IMapBookings, IState> {
 
     updateTime = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-        this.props.timeSelected(this.state.date, parseInt(e.target.value));
+        this.props.timeSelected(moment(this.state.date).format("YYYY-MM-DD"), parseInt(e.target.value));
     }
 
     public render() {
 
         if (!this.state.clicked) {
             return <div className="container-search">
-                <h2 className="heading-date-time">Vilken dag vill ni boka?</h2>
-                <input onChange={this.updateDate} type="date" id="date" min={dateOfToday} />
+                <h2 className="heading-date">Vilken dag vill ni boka?</h2>
+                <div className="calendar">
+                    <Calendar onChange={this.updateDate} value={this.state.date} minDate={this.state.currentDate} />
+                </div>
             </div>
         }
 
@@ -93,10 +101,12 @@ class SearchDate extends React.Component<IMapBookings, IState> {
             <React.Fragment>
                 <div className="container-search">
 
-                    <h2 className="heading-date-time">Vilken dag vill ni boka?</h2>
-                    <input onChange={this.updateDate} type="date" id="date" min={dateOfToday} />
+                    <h2 className="heading-date">Vilken dag vill ni boka?</h2>
+                    <div className="calendar">
+                        <Calendar onChange={this.updateDate} value={this.state.date} minDate={this.state.currentDate} />
+                    </div>
 
-                    <h2 className="heading-date-time">Välj tid:</h2>
+                    <h2 className="heading-time">Välj tid:</h2>
                     <div className="checkbox-container">
 
                         {this.state.firstSitting.length < 15 || this.state.firstSitting.length === null ? (
