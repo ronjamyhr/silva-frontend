@@ -3,7 +3,7 @@ import './Booking.css';
 import SearchDate from './search-date/Search-date';
 import axios from 'axios';
 import BookTable from './book-table/Book-table';
-import urlPath from './../../config-url';
+import urlPath from '../../config-url';
 
 export interface IBooking {
     booking_id: number,
@@ -67,6 +67,7 @@ class Booking extends React.Component<{}, IBookings> {
         });
     }
 
+
     public render() {
         return (
             <React.Fragment>
@@ -75,8 +76,10 @@ class Booking extends React.Component<{}, IBookings> {
                         <div className="headline">
                             <h1>Boka bord</h1>
                         </div>
-                        {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
-                        {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime} /> : null}
+                      
+                            {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
+                            {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime}/> : null}
+
                     </div>
                 </main>
             </React.Fragment>
