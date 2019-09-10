@@ -8,6 +8,7 @@ import Contact from './components/contact/Contact'
 import NotFound from './components/not-found/Not-found';
 import Booking from './components/booking/Booking';
 import Admin from './components/admin/Admin';
+import Menu from './components/menu/Menu';
 
 class App extends React.Component {
 
@@ -24,6 +25,7 @@ class App extends React.Component {
 						)}></Route>
                         <Route path="/booking" component={Booking} />
 						<Route path="/contact" component={Contact} />
+						<Route path="/menu" component={Menu} />
 						<Route path="/admin" component={Admin} />
 						<Route component={ NotFound } />
 					</Switch>
