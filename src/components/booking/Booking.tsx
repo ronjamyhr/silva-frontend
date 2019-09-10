@@ -65,6 +65,7 @@ class Booking extends React.Component<{}, IBookings> {
         });
     }
 
+
     public render() {
         return (
             <React.Fragment>
@@ -74,7 +75,7 @@ class Booking extends React.Component<{}, IBookings> {
                             <h1>Boka bord</h1>
                         </div>
                             {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
-                            {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime} /> : null}
+                            {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime}/> : null}
                     </div>
                 </main>
             </React.Fragment>
