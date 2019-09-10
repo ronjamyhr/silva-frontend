@@ -24,8 +24,6 @@ class Contact extends React.Component {
                         aria-label="Facebook icon"></i></a>
                     <a href="https://instagram.com"><i className="instagram-icon fab fa-instagram"
                         aria-label="Instagram icon"></i></a>
-                    <h2 className="small-header-contact">KARTA</h2>
-                    <p>HÄR SKA EN KARTA LÄGGAS</p>
                 </main>
             </React.Fragment>
         );
