@@ -43,7 +43,7 @@ class Booking extends React.Component<{}, IBookings> {
     }
 
     getBookings() {
-        axios.get(`http://${urlPath}/booking/get-bookings.php`)
+        axios.get(`http://${urlPath}/api/booking/get-bookings.php`)
             .then((result: any) => {
                 this.setState({
                     bookings: result.data

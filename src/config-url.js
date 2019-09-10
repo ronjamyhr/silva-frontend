@@ -1,2 +1,2 @@
-const urlPath = "localhost";
+const urlPath = "localhost/silva-backend";
 export default urlPath;
