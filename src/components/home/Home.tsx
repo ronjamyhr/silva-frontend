@@ -28,7 +28,7 @@ class Home extends React.Component {
 					<article className="about-menu">
 						<h2 className="about-menu-header">Vår meny</h2>
 						<p className="about-menu-text">Vår meny varieras efter årstid. De bästa råvarona efter säsong och såklart finns det något för alla. Vår avsmakningsmeny beståd av tio mindre rätter som köksmästaren satt ihop på ett helt fantastiskt sätt.</p>
-						<Link className="menu-link" to="/booking">Se vår meny här</Link>
+						<Link className="menu-link" to="/menu">Se vår meny här</Link>
 					</article>
 					<section className="gallery-quote-section">
 						<div className="gallery-section">
