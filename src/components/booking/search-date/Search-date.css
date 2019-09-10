@@ -1,34 +1,51 @@
-.search-date-form {
+.container-search {
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* height: 50%; */
-    width: 50%;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 2rem;
-    border-radius: 1%;
+    /* width: 50%;  */
+    /* color: #fff; */
+    /* background: rgba(0, 0, 0, 0.7); */
+    padding: 2em;
+    /* border-radius: 1%; */
+    text-align: center;
 }
+
+/* 
+.container-search{
+    border: 1px solid red;
+} */
+
 .checkbox-container {
     display: flex;
     justify-content: center;
 }
-.checkbox-right, .checkbox-left {
+
+.checkbox-right,
+.checkbox-left {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .checkbox-left label,
 .checkbox-right label,
-input[type="checkbox"]{
-    margin: 1rem .5rem 5rem .5rem;
+input[type="checkbox"] {
+    margin: 1rem .5rem .5rem .5rem;
 }
-label, h3 {
-    margin: 1rem 0;
+
+.heading-date-time {
+    margin: 1em 0;
     font-family: "Raleway";
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+} 
+
+label {
+    font-family: "Raleway";
+    font-size: 1.1rem;
 }
+
 /* input[type='checkbox'] {
     -webkit-appearance:none;
     width:30px;
@@ -44,35 +61,45 @@ input[type='checkbox']:hover {
     background: #2d3f4d;
     cursor: pointer;
 } */
-h3 {
-    margin-top: 4rem;
+/* h3 {
+    margin-top: 2rem;
+} */
+
+::-webkit-datetime-edit {
+    padding: .5rem;
 }
-::-webkit-datetime-edit { padding: .5rem; }
 
 .checkbox-label {
-    position: relative;   
+    position: relative;
     cursor: pointer;
-    border: 1px solid #fff;
+    border: 1px solid lightgray;
+    /* border-radius: 2px; */
 }
+
 .checkbox-label:hover {
     background: #2d3f4d;
-    -webkit-transition-duration: 0.2s; /* Safari */
+    -webkit-transition-duration: 0.2s;
+    /* Safari */
     transition-duration: 0.2s;
+    border: 1px solid black;
+
 }
 
 .checkbox-label [type="checkbox"] {
     display: none;
 }
-[type="checkbox"] + span {
+
+[type="checkbox"]+span {
     display: inline-block;
     padding: 1em 2em;
     border-radius: 1%;
 }
-:checked + span {
-    background: #2d3f4d;
-    display: inline-block;    
-}
 
+:checked+span {
+    background: #2d3f4d;
+    display: inline-block;
+}
+/* 
 button {
     border: none;
     padding: 16px 32px;
@@ -81,7 +108,8 @@ button {
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.2s; /* Safari */
+    -webkit-transition-duration: 0.2s;
+    /* Safari 
     transition-duration: 0.2s;
     cursor: pointer;
     background-color: #fff;
@@ -89,39 +117,40 @@ button {
     border: 2px solid #fff;
     border-radius: 1%;
     text-transform: uppercase;
-}
+} */
+/* 
 
-  
 button:hover {
     background-color: #2d3f4d;
     color: #fff;
-}
+} */
 
 /* Removes the clear button from date inputs */
-input[type="date"]::-webkit-clear-button {
+/* input[type="date"]::-webkit-clear-button {
     display: none;
-}
+} */
 
 /* Removes the spin button */
-input[type="date"]::-webkit-inner-spin-button { 
+/* input[type="date"]::-webkit-inner-spin-button {
     display: none;
-}
+} */
 
 /* Always display the drop down caret */
-input[type="date"]::-webkit-calendar-picker-indicator {
+/* input[type="date"]::-webkit-calendar-picker-indicator {
     color: #2d3f4d;
-}
+} */
 
 /* A few custom styles for date inputs */
 input[type="date"] {
     appearance: none;
     -webkit-appearance: none;
-    color: #2d3f4d;
-    font-family: "Helvetica", arial, sans-serif;
+    /* color: #2d3f4d; */
+    font-family: "Raleway", arial, sans-serif;
     font-size: 18px;
-    border: 1px solid #2d3f4d;
-    background: #ecf0f1;
+    border: 1px solid lightgray;
+    /* background: #ecf0f1; */
     padding: 7px;
+    /* border-radius: 2px; */
     /* display: inline-block !important;
     visibility: visible !important; */
 }
@@ -129,6 +158,8 @@ input[type="date"] {
 input[type="date"]:focus {
     color: #2d3f4d;
     box-shadow: none;
+    border: 1px solid black;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
 }
+

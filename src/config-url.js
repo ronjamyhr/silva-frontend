@@ -1,2 +1,2 @@
-const urlPath = "localhost";
+const urlPath = "localhost:8888/api";
 export default urlPath;
