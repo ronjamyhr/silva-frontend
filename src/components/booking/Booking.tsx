@@ -8,7 +8,7 @@ import urlPath from '../../config-url';
 export interface IBooking {
     booking_id: number,
     booking_date: any,
-    sitting_time: number,
+    sitting_time: any,
     number_of_guests_at_table: number,
     name_on_booking: string,
     email_on_booking: string

@@ -12,8 +12,17 @@
     border: 1px solid lightgrey;
 }
 
-.calendar .react-calendar__tile--active {
+.calendar .react-calendar__tile--active, .calendar .react-calendar__tile--active:enabled:focus {
     background: #2d3f4d;
+}
+
+.calendar .react-calendar__tile--active:enabled:hover {
+    background: darkgray;
+}
+
+.calendar .react-calendar__navigation__label {
+    font-family: "Raleway"; 
+    font-size: 1rem;
 }
 
 .calendar abbr[title] {
@@ -22,10 +31,6 @@
 
 .calendar .react-calendar__month-view__weekdays {
     text-transform: none;
-}
-
-.calendar .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
-    background: darkgray;
 }
 
 .heading-date,
