@@ -36,12 +36,14 @@ class Booking extends React.Component<{}, IBookings> {
 
         this.getBookings = this.getBookings.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleDateAndTime = this.handleDateAndTime.bind(this);
     }
 
     componentDidMount() {
         this.getBookings();
     }
 
+    // get all bookings from db
     getBookings() {
         axios.get(`http://${urlPath}/booking/get-bookings.php`)
             .then((result: any) => {
@@ -53,7 +55,8 @@ class Booking extends React.Component<{}, IBookings> {
             });
     }
 
-    handleTime(date: string, time: number) {
+    // set choosen date and time as state 
+    handleDateAndTime(date: string, time: number) {
 
         this.setState(prevState => {
             let dateAndTime = Object.assign({}, prevState.dateAndTime);
@@ -76,7 +79,7 @@ class Booking extends React.Component<{}, IBookings> {
                         <div className="headline">
                             <h1>Boka bord</h1>
                         </div>
-                            {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
+                            {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleDateAndTime} />}
                             {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime}/> : null}
                     </div>
                 </main>

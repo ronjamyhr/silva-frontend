@@ -13,7 +13,6 @@ interface IState {
     date: Date;
     firstSitting: any;
     secondSitting: any;
-    // dateList: any;
     clicked: boolean;
     currentDate: Date;
 }
@@ -27,7 +26,6 @@ class SearchDate extends React.Component<IMapBookings, IState> {
             date: new Date(),
             firstSitting: [],
             secondSitting: [],
-            // dateList: [],
             clicked: false,
             currentDate: new Date(Date.now())
         }
@@ -37,48 +35,33 @@ class SearchDate extends React.Component<IMapBookings, IState> {
         this.sendDateAndTime = this.sendDateAndTime.bind(this);
     }
 
+    // set choosen date in calendar as state
     updateDate = (e: any) => {
 
         this.setState({ date: e }, this.isAvailable);
         this.setState({ clicked: true });
-
-        // console.log('hej ', e);
     }
 
+    // check if there are any bookings in db, check sitting time and set sitting times in state
     isAvailable = () => {
 
-        // const dateList: number[] = [];
         const dateList = [];
         const firstSittingTime = [];
         const secondSittingTime = [];
 
         for (let i = 0; i < this.props.bookings.length; i++) {
-
             const element = this.props.bookings[i];
 
             if (element.booking_date === moment(this.state.date).format("YYYY-MM-DD")) {
-
                 dateList.push(element.sitting_time);
-                // this.setState({ dateList: element.sitting_time });
-                // console.log("hejsan" ,typeof element.sitting_time)
             }
         }
 
         for (let i = 0; i < dateList.length; i++) {
 
-            // var hej = dateList[i];
-            // console.log('date list is number?: ', isNaN(dateList[i]));
-            // console.log('date list: ', parseInt(dateList[i]));
-
-            // console.log(dateList);
-            // console.log('vilken typ är dateList[i]? ',typeof dateList[i]);
-            // console.log(typeof '18');
-
             if (dateList[i] === "18") {
                 firstSittingTime.push(dateList[i]);
-                // console.log('KORVAR');
             }
-
             if (dateList[i] === "21") {
                 secondSittingTime.push(dateList[i]);
             }
@@ -90,14 +73,13 @@ class SearchDate extends React.Component<IMapBookings, IState> {
         });
     }
 
+    // send choosen date and time with props to parent component
     sendDateAndTime = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         this.props.timeSelected(moment(this.state.date).format("YYYY-MM-DD"), parseInt(e.target.value));
     }
 
     public render() {
-
-        // console.log('hej 2 ', this.state.date);
 
         if (!this.state.clicked) {
             return <div className="container-search">
@@ -118,7 +100,6 @@ class SearchDate extends React.Component<IMapBookings, IState> {
 
                     <h2 className="heading-time">Välj tid:</h2>
                     <div className="checkbox-container">
-
                         {this.state.firstSitting.length < 15 || this.state.firstSitting.length === null ? (
                             <div className="checkbox-left">
                                 <label htmlFor="time18" className="checkbox-label">
@@ -146,9 +127,7 @@ class SearchDate extends React.Component<IMapBookings, IState> {
                         ) : (
                                 null
                             )}
-
                     </div>
-
                 </div>
             </React.Fragment>
         );

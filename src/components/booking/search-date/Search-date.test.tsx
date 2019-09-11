@@ -3,7 +3,6 @@ import * as React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
 import SearchDate from './Search-date';
-// import { IMapBookings } from './Search-date';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -15,7 +14,7 @@ describe('Search-date component ', () => {
     }
 
     it('renders without crashing', () => {
-        shallow(<SearchDate {...props}/>);
+        shallow(<SearchDate {...props} />);
     });
 
     it('should set state after calling updateDate', () => {

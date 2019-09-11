@@ -6,7 +6,6 @@ import Enzyme from 'enzyme';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-
 describe('Booking', () => {
 
     it('should render without crashing', () => {
@@ -22,7 +21,6 @@ describe('Booking', () => {
                 time: 0,
                 date: ""
             }
-
         });
     });
 });
