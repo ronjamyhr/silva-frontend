@@ -1,15 +1,26 @@
 import React from 'react';
-import Bookings from './Booking';
+import Booking from './Booking';
+import { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
-import ReactDOM from 'react-dom';
-import Booking from './Booking';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it('should render without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Booking />, div);
-    ReactDOM.unmountComponentAtNode(div);
-});
+describe('Booking', () => {
 
+    it('should render without crashing', () => {
+        shallow(<Booking />);
+    });
+
+    it('has a state of showBooking', () => {
+        const wrapper = shallow(<Booking />);
+        expect(wrapper.state()).toEqual({
+            bookings: [],
+            showBooking: false,
+            dateAndTime: {
+                time: 0,
+                date: ""
+            }
+        });
+    });
+});

@@ -8,7 +8,7 @@ import urlPath from '../../config-url';
 export interface IBooking {
     booking_id: number,
     booking_date: any,
-    sitting_time: number,
+    sitting_time: any,
     number_of_guests_at_table: number,
     name_on_booking: string,
     email_on_booking: string
@@ -36,14 +36,16 @@ class Booking extends React.Component<{}, IBookings> {
 
         this.getBookings = this.getBookings.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleDateAndTime = this.handleDateAndTime.bind(this);
     }
 
     componentDidMount() {
         this.getBookings();
     }
 
+    // get all bookings from db
     getBookings() {
-        axios.get(`http://${urlPath}/api/booking/get-bookings.php`)
+        axios.get(`http://${urlPath}/booking/get-bookings.php`)
             .then((result: any) => {
                 this.setState({
                     bookings: result.data
@@ -53,7 +55,8 @@ class Booking extends React.Component<{}, IBookings> {
             });
     }
 
-    handleTime(date: string, time: number) {
+    // set choosen date and time as state 
+    handleDateAndTime(date: string, time: number) {
 
         this.setState(prevState => {
             let dateAndTime = Object.assign({}, prevState.dateAndTime);
@@ -76,10 +79,8 @@ class Booking extends React.Component<{}, IBookings> {
                         <div className="headline">
                             <h1>Boka bord</h1>
                         </div>
-                      
-                            {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleTime.bind(this)} />}
+                            {this.state.showBooking ? null : <SearchDate bookings={this.state.bookings} timeSelected={this.handleDateAndTime} />}
                             {this.state.showBooking ? <BookTable dateTime={this.state.dateAndTime}/> : null}
-
                     </div>
                 </main>
             </React.Fragment>
