@@ -43,7 +43,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	getBookings(date: string, time: number) {
 		// Set correct path in config-url.js
-		axios.get(`http://${urlPath}/api/booking/get-bookings.php
+		axios.get(`http://${urlPath}/booking/get-bookings.php
 		`)
       .then(res => {
 		this.mapBookings(date, time, res.data);

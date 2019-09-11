@@ -2,20 +2,19 @@ import React from 'react';
 import './Search-date.css';
 import { IBooking } from '../Booking';
 import moment from "moment";
+import Calendar from 'react-calendar';
 
-const dateOfToday = moment().format('YYYY-MM-DD');
-
-interface IMapBookings {
+export interface IMapBookings {
     bookings: IBooking[];
     timeSelected(date: string, thetime: number): void;
 }
 
 interface IState {
-    date: string;
+    date: Date;
     firstSitting: any;
     secondSitting: any;
-    dateList: any;
     clicked: boolean;
+    currentDate: Date;
 }
 
 class SearchDate extends React.Component<IMapBookings, IState> {
@@ -24,47 +23,46 @@ class SearchDate extends React.Component<IMapBookings, IState> {
         super(props);
 
         this.state = {
-            date: '',
+            date: new Date(),
             firstSitting: [],
             secondSitting: [],
-            dateList: [],
-            clicked: false
+            clicked: false,
+            currentDate: new Date(Date.now())
         }
 
         this.updateDate = this.updateDate.bind(this);
         this.isAvailable = this.isAvailable.bind(this);
-        this.updateTime = this.updateTime.bind(this);
+        this.sendDateAndTime = this.sendDateAndTime.bind(this);
     }
 
-    updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // set choosen date in calendar as state
+    updateDate = (e: any) => {
 
-        this.setState({ date: e.target.value }, this.isAvailable);
+        this.setState({ date: e }, this.isAvailable);
         this.setState({ clicked: true });
     }
 
+    // check if there are any bookings in db, check sitting time and set sitting times in state
     isAvailable = () => {
 
-        const dateList: number[] = [];
+        const dateList = [];
         const firstSittingTime = [];
         const secondSittingTime = [];
 
         for (let i = 0; i < this.props.bookings.length; i++) {
-
             const element = this.props.bookings[i];
 
-            if (element.booking_date === this.state.date) {
-
+            if (element.booking_date === moment(this.state.date).format("YYYY-MM-DD")) {
                 dateList.push(element.sitting_time);
-                this.setState({ dateList: element.sitting_time });
             }
         }
 
         for (let i = 0; i < dateList.length; i++) {
-            if (dateList[i] == 18) {
+
+            if (dateList[i] === "18") {
                 firstSittingTime.push(dateList[i]);
             }
-
-            if (dateList[i] == 21) {
+            if (dateList[i] === "21") {
                 secondSittingTime.push(dateList[i]);
             }
         }
@@ -75,34 +73,37 @@ class SearchDate extends React.Component<IMapBookings, IState> {
         });
     }
 
-    updateTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // send choosen date and time with props to parent component
+    sendDateAndTime = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-        this.props.timeSelected(this.state.date, parseInt(e.target.value));
+        this.props.timeSelected(moment(this.state.date).format("YYYY-MM-DD"), parseInt(e.target.value));
     }
 
     public render() {
 
         if (!this.state.clicked) {
             return <div className="container-search">
-                <h2 className="heading-date-time">Vilken dag vill ni boka?</h2>
-                <input onChange={this.updateDate} type="date" id="date" min={dateOfToday} />
+                <h2 className="heading-date">Vilken dag vill ni boka?</h2>
+                <div className="calendar">
+                    <Calendar onChange={this.updateDate} value={this.state.date} minDate={this.state.currentDate} />
+                </div>
             </div>
         }
 
         return (
             <React.Fragment>
                 <div className="container-search">
+                    <h2 className="heading-date">Vilken dag vill ni boka?</h2>
+                    <div className="calendar">
+                        <Calendar onChange={this.updateDate} value={this.state.date} minDate={this.state.currentDate} />
+                    </div>
 
-                    <h2 className="heading-date-time">Vilken dag vill ni boka?</h2>
-                    <input onChange={this.updateDate} type="date" id="date" min={dateOfToday} />
-
-                    <h2 className="heading-date-time">Välj tid:</h2>
+                    <h2 className="heading-time">Välj tid:</h2>
                     <div className="checkbox-container">
-
                         {this.state.firstSitting.length < 15 || this.state.firstSitting.length === null ? (
                             <div className="checkbox-left">
                                 <label htmlFor="time18" className="checkbox-label">
-                                    <input onChange={this.updateTime} type="checkbox" id="time18" value="18" />
+                                    <input onChange={this.sendDateAndTime} type="checkbox" id="time18" value="18" />
                                     <span>18</span>
                                 </label>
                             </div>
@@ -113,7 +114,7 @@ class SearchDate extends React.Component<IMapBookings, IState> {
                         {this.state.secondSitting.length < 15 || this.state.secondSitting.length === null ? (
                             <div className="checkbox-right">
                                 <label htmlFor="time21" className="checkbox-label">
-                                    <input onChange={this.updateTime} type="checkbox" id="time21" value="21" />
+                                    <input onChange={this.sendDateAndTime} type="checkbox" id="time21" value="21" />
                                     <span>21</span>
                                 </label>
                             </div>
@@ -126,9 +127,7 @@ class SearchDate extends React.Component<IMapBookings, IState> {
                         ) : (
                                 null
                             )}
-
                     </div>
-
                 </div>
             </React.Fragment>
         );
