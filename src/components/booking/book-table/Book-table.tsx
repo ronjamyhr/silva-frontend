@@ -19,6 +19,9 @@ interface IFormData {
     number_of_guests: number;
     date: string;
     time: number;
+    nameInputError: string,
+    emailInputError: string,
+    phoneNumberInputError: string,
 }
 
 class BookTable extends React.Component <IDateTime, IFormData> {
@@ -32,28 +35,90 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             phone_number: '',
             number_of_guests: 1,
             date: this.props.dateTime.date,
-            time: this.props.dateTime.time
+            time: this.props.dateTime.time,
+            nameInputError: '',
+            emailInputError: '',
+            phoneNumberInputError: ''
         }
 
         this.submitFormInputs = this.submitFormInputs.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.validateForm = this.validateForm.bind(this);
     }
 
     handleInputChange(event: any) {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-        const key = event.target.name;
+        const name = event.target.name;
             
         this.setState({
-            [key]: key === 'number_of_guests' ? parseInt(value) : value,
-            date: this.props.dateTime.date,
-            time: this.props.dateTime.time
+            [name]: name === 'number_of_guests' ? parseInt(value) : value
         } as any);
 
-      }
+    }
+
+    validateForm(event: any) {
+        event.preventDefault();
+
+        const { name, value } = event.target;
+        let emailRegEx = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/;
+        let specialCharactersRegEx = /\`|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:/;
+        let phoneNumberRegEx = /^(\(?\+?[0-9]*\)?)?[0-9_\- ]/;
+
+        let nameInput = '';
+        let emailInput = '';
+        let phoneNumberInput = '';
+
+        if (name === 'name') {
+            if (value == '') {
+                nameInput = 'Du måste ange ditt namn.';
+            } else if (specialCharactersRegEx.test(value)) {
+                nameInput = 'Namn får bara innehålla bokstäver och mellanslag.';
+            } 
+            console.log('name', nameInput);
+        }
+        
+        if (name === 'email') {
+            if (value == '') {
+                emailInput = 'Du måste ange din e-post.';
+            } else if (!emailRegEx.test(value)) {
+                emailInput = 'E-posten är felaktig.';
+            } 
+            console.log('email', emailInput);
+        }
+        
+        if (name === 'phone_number') {
+            if (value.length < 8) {
+                phoneNumberInput = 'Telefonnumret måste innehålla minst 8 siffor';
+            } else if (!phoneNumberRegEx.test(value)) {
+                phoneNumberInput = 'Telefonnumret får bara innehålla siffror och mellanslag';
+            } 
+            console.log('phone', phoneNumberInput);
+        }
+
+        this.setState({
+            nameInputError: nameInput,
+            emailInputError: emailInput,
+            phoneNumberInputError: phoneNumberInput
+        } as any)
+
+        if (nameInput || emailInput || phoneNumberInput) {
+            return false;
+        } else {
+            return true;
+        }
+
+        // console.log('name', this.state.nameInputError);
+        // console.log('email', this.state.emailInputError);
+        // console.log('phone', this.state.phoneNumberInputError);
+
+    }
 
     submitFormInputs(event: any) {
         event.preventDefault();
 
+        // if(!this.validateForm()) {
+        //     return;
+        // }
 
         const customer = {
             name: this.state.name,
@@ -79,6 +144,15 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 
     }
 
+    // if (isValid) {
+    //     // Clear error state
+    //     this.setState({
+    //       nameError: "",
+    //       emailError: "",
+    //       phoneNumberError: "",
+    //       isDisable: false
+    //     });
+
 	public render() {
         console.log('props', this.props.dateTime.date);
         console.log('state', this.state.date);
@@ -87,13 +161,19 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 			<div className="form-container">
 			  	<form onSubmit={this.submitFormInputs} className="book-table-form">
                     <label htmlFor="name">Namn</label>
-                    <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleInputChange}/>
+                    <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleInputChange} onBlur={this.validateForm}/>
+                    <span className="error-message">{this.state.nameInputError}</span>
+
                     <label htmlFor="email">Mailadress</label>
-                    <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleInputChange}/>
+                    <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleInputChange} onBlur={this.validateForm}/>
+                    <span className="error-message">{this.state.emailInputError}</span>
+
                     <label htmlFor="phone">Telefonnummer</label>
-                    <input type="text" name="phone_number" id="phone" value={this.state.phone_number} onChange={this.handleInputChange}/>
+                    <input type="text" name="phone_number" id="phone" value={this.state.phone_number} onChange={this.handleInputChange} onBlur={this.validateForm}/>
+                    <span className="error-message">{this.state.phoneNumberInputError}</span>
+
                     <label htmlFor="guests">Hur många ska äta?</label>
-                    <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange}/>
+                    <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.validateForm}/>
                     <button type="submit">Boka bord</button>
                 </form>
 			</div>
