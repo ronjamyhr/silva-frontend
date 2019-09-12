@@ -4,6 +4,7 @@ import axios from 'axios';
 import Search from './search/Search';
 import Bookings from './bookings/Bookings';
 import urlPath from './../../config-url';
+import IBookingToUpdate from './interfaces/IBooking-to-update';
 
 export interface IBooking {
 	booking_id: number,
@@ -38,22 +39,22 @@ class Admin extends React.Component<{}, IBookings> {
 				email_on_booking: ''
 			}
 		]
-		
+
 	}
 
 	getBookings(date: string, time: number) {
 		// Set correct path in config-url.js
-		axios.get(`http://${urlPath}/api/booking/get-bookings.php
+		axios.get(`http://${urlPath}/booking/get-bookings.php
 		`)
-      .then(res => {
-		this.mapBookings(date, time, res.data);
-	  })
+			.then(res => {
+				this.mapBookings(date, time, res.data);
+			})
 	}
 
 	mapBookings(date: string, time: number, res: any) {
 		let mappedBookings: any = [];
-		res.map( (item: any) => {
-			if(date == item.booking_date && time == item.sitting_time){
+		res.map((item: any) => {
+			if (date == item.booking_date && time == item.sitting_time) {
 				mappedBookings.push(item);
 			}
 			return item;
@@ -66,41 +67,37 @@ class Admin extends React.Component<{}, IBookings> {
 	deleteBooking(id: number) {
 		axios.delete(`http://${urlPath}/api/booking/delete-booking.php
 		`, {
-            "data": {
-                "id": id
-            }
-         })
-		.then( () => {
-			const prevBookings = this.state.bookings;
-			const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
-			this.setState({bookings: filteredBookings});
-		})
+				"data": {
+					"id": id
+				}
+			})
+			.then(() => {
+				const prevBookings = this.state.bookings;
+				const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
+				this.setState({ bookings: filteredBookings });
+			})
 	}
 
-	update(id: number) {
-		const mock = {
-			"id": id,
-			"date": "2019-09-21",
-			"time": 18,
-			"number_of_guests": 5,
-		};
-		axios.post(`http://${urlPath}/api/booking/update.php
-		`, JSON.stringify(mock)
-         )
-    	.then(function(response){
-        	console.log('saved successfully')
-		});
+	update(booking: IBookingToUpdate) {
+		axios.post(`http://${urlPath}/booking/update.php
+		`, JSON.stringify(booking)
+		)
+			.then(function (response) {
+				console.log('saved successfully')
+			});
 	}
 
 	public render() {
 		return (
-			<div>
-
-				<Search getBookings={this.getBookings}/>
-
-				<Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking} update={this.update}/>
-                
-			</div>
+			<main className="admin-main">
+				<div className="admin-container">
+					<div className="admin-headline">
+						<h1>Admin</h1>
+					</div>
+					<Search getBookings={this.getBookings} />
+					<Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking} update={this.update} />
+				</div>
+			</main>
 		);
 	}
 }

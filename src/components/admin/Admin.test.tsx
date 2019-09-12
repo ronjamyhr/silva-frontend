@@ -20,7 +20,7 @@ describe('Admin ', () => {
                 {
                     booking_id: 0,
                     booking_date: '',
-                    sitting_time: 0,
+                    sitting_time: 18,
                     number_of_guests_at_table: 0,
                     name_on_booking: '',
                     email_on_booking: ''

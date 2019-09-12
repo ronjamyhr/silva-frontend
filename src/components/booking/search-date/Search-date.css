@@ -1,32 +1,93 @@
 .container-search {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
-    /* height: 50%; */
-    /* width: 50%;  */
-    /* color: #fff; */
-    /* background: rgba(0, 0, 0, 0.7); */
     padding: 2em;
-    /* border-radius: 1%; */
     text-align: center;
 }
 
-/* 
-.container-search{
-    border: 1px solid red;
-} */
+.calendar .react-calendar {
+    font-family: "Raleway";
+    margin: 0 auto;
+    border: 1px solid lightgrey;
+}
+
+.calendar .react-calendar__tile--active,
+.calendar .react-calendar__tile--active:enabled:focus {
+    background: #2d3f4d;
+}
+
+.calendar .react-calendar__tile--active:enabled:hover {
+    background: darkgray;
+}
+
+.calendar .react-calendar__navigation__label {
+    font-family: "Raleway";
+    font-size: 1rem;
+}
+
+.calendar abbr[title] {
+    text-decoration: none;
+}
+
+.calendar .react-calendar__month-view__weekdays {
+    text-transform: none;
+}
+
+.heading-date,
+.heading-time {
+    margin: 1em 0;
+    font-family: "Raleway";
+    font-size: 1.1rem;
+}
 
 .checkbox-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
 .checkbox-right,
 .checkbox-left {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+}
+
+.checkbox-label {
+    font-family: "Raleway";
+    font-size: 1.1rem;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid lightgray;
+}
+
+.checkbox-label:hover {
+    background: #2d3f4d;
+    color: white;
+    -webkit-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    border: 1px solid black;
 }
 
 .checkbox-left label,
@@ -35,54 +96,8 @@ input[type="checkbox"] {
     margin: 1rem .5rem .5rem .5rem;
 }
 
-.heading-date-time {
-    margin: 1em 0;
-    font-family: "Raleway";
-    font-size: 1.1rem;
-} 
-
-label {
-    font-family: "Raleway";
-    font-size: 1.1rem;
-}
-
-/* input[type='checkbox'] {
-    -webkit-appearance:none;
-    width:30px;
-    height:30px;
-    background:white;
-    border-radius:5px;
-    border:2px solid #555;
-}
-input[type='checkbox']:checked {
-    background: #2d3f4d;
-}
-input[type='checkbox']:hover {
-    background: #2d3f4d;
-    cursor: pointer;
-} */
-/* h3 {
-    margin-top: 2rem;
-} */
-
 ::-webkit-datetime-edit {
     padding: .5rem;
-}
-
-.checkbox-label {
-    position: relative;
-    cursor: pointer;
-    border: 1px solid lightgray;
-    /* border-radius: 2px; */
-}
-
-.checkbox-label:hover {
-    background: #2d3f4d;
-    -webkit-transition-duration: 0.2s;
-    /* Safari */
-    transition-duration: 0.2s;
-    border: 1px solid black;
-
 }
 
 .checkbox-label [type="checkbox"] {
@@ -92,74 +107,4 @@ input[type='checkbox']:hover {
 [type="checkbox"]+span {
     display: inline-block;
     padding: 1em 2em;
-    border-radius: 1%;
 }
-
-:checked+span {
-    background: #2d3f4d;
-    display: inline-block;
-}
-/* 
-button {
-    border: none;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.2s;
-    /* Safari 
-    transition-duration: 0.2s;
-    cursor: pointer;
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #fff;
-    border-radius: 1%;
-    text-transform: uppercase;
-} */
-/* 
-
-button:hover {
-    background-color: #2d3f4d;
-    color: #fff;
-} */
-
-/* Removes the clear button from date inputs */
-/* input[type="date"]::-webkit-clear-button {
-    display: none;
-} */
-
-/* Removes the spin button */
-/* input[type="date"]::-webkit-inner-spin-button {
-    display: none;
-} */
-
-/* Always display the drop down caret */
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-    color: #2d3f4d;
-} */
-
-/* A few custom styles for date inputs */
-input[type="date"] {
-    appearance: none;
-    -webkit-appearance: none;
-    /* color: #2d3f4d; */
-    font-family: "Raleway", arial, sans-serif;
-    font-size: 18px;
-    border: 1px solid lightgray;
-    /* background: #ecf0f1; */
-    padding: 7px;
-    /* border-radius: 2px; */
-    /* display: inline-block !important;
-    visibility: visible !important; */
-}
-
-input[type="date"]:focus {
-    color: #2d3f4d;
-    box-shadow: none;
-    border: 1px solid black;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-}
-
