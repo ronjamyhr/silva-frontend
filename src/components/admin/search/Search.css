@@ -1,6 +1,16 @@
 .container-admin-search {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: space-around;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
     padding: 2em;
     min-width: 80vw;
+    border-bottom: 1px solid lightgrey;
 }
 
 .admin-search-form {
@@ -46,7 +56,8 @@
     margin: .5em 0;
 }
 
-.admin-button {
+.admin-button,
+.admin-book-button {
     width: 150px;
     font-size: 1.1rem;
     font-family: Raleway;
@@ -59,6 +70,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    margin: 1em 0;
 }
 
 .admin-search-form input[type="date"i] {

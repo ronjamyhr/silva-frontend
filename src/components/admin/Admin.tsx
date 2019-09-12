@@ -17,6 +17,7 @@ export interface IBooking {
 
 export interface IBookings {
 	bookings: IBooking[];
+	showBooking: boolean;
 }
 
 class Admin extends React.Component<{}, IBookings> {
@@ -39,13 +40,13 @@ class Admin extends React.Component<{}, IBookings> {
 				name_on_booking: '',
 				email_on_booking: ''
 			}
-		]
-
+		],
+		showBooking: false
 	}
 
 	getBookings(date: string, time: number) {
 		// Set correct path in config-url.js
-		axios.get(`http://${urlPath}/api/booking/get-bookings.php
+		axios.get(`http://${urlPath}/booking/get-bookings.php
 		`)
 			.then(res => {
 				this.mapBookings(date, time, res.data);
@@ -72,45 +73,50 @@ class Admin extends React.Component<{}, IBookings> {
 			if (date == item.booking_date && time == item.sitting_time) {
 				mappedBookings.push(item);
 			}
-
 		})
 
+		console.log('map booking längd', mappedBookings.length);
+
+
 		this.setState({
-			bookings: mappedBookings
+			bookings: mappedBookings,
+			showBooking: true
 		});
 
 	}
 
 	deleteBooking(id: number) {
 
-		axios.delete(`http://${urlPath}/api/booking/delete-booking.php
+		axios.delete(`http://${urlPath}/booking/delete-booking.php
 		`, {
-            "data": {
-                "id": id
-            }
-         })
-		.then( () => {
-			const prevBookings = this.state.bookings;
-			const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
-			this.setState({bookings: filteredBookings});
-			alert("Booking deleted");
-		})
+				"data": {
+					"id": id
+				}
+			})
+			.then(() => {
+				const prevBookings = this.state.bookings;
+				const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
+				this.setState({ bookings: filteredBookings });
+				alert("Booking deleted");
+			})
 
 	}
 
 	update(booking: IBookingToUpdate) {
 
-		axios.post(`http://${urlPath}/api/booking/update.php
+		axios.post(`http://${urlPath}/booking/update.php
 		`, JSON.stringify(booking)
-         )
-    	.then(function(response){
-			console.log('saved successfully')
-			alert("Booking updated");
-		});
+		)
+			.then(function (response) {
+				console.log('saved successfully')
+				alert("Booking updated");
+			});
 
 	}
 
 	public render() {
+
+		console.log(this.state.bookings.length);
 
 		return (
 			<main className="admin-main">
@@ -119,11 +125,11 @@ class Admin extends React.Component<{}, IBookings> {
 						<h1>Admin</h1>
 					</div>
 					<Search getBookings={this.getBookings} />
-					<Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking} update={this.update} />
+					{this.state.bookings.length <= 1 && this.state.showBooking === true ? <p className="no-bookings-message">Det finns inga bokningar det valda datumet.</p> : <Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking} update={this.update} />}
 				</div>
 			</main>
 		);
-		
+
 	}
 }
 
