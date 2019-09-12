@@ -2,9 +2,10 @@ import React from 'react';
 import './Bookings.css';
 import IBookingToUpdate from './../interfaces/IBooking-to-update';
 import { isTemplateElement } from '@babel/types';
+import { IBooking } from '../../booking/Booking';
 
 interface IBookingsProps {
-	bookingsOnTime: any[]; // Any needed to only need one function @ handleDate()
+	bookingsOnTime: IBooking[]; // Any needed to only need one function @ handleDate()
 	deleteBooking(id: number): any;
 	update(booking: IBookingToUpdate): void;
 }
