@@ -79,12 +79,6 @@ class Admin extends React.Component<{}, IBookings> {
 	}
 
 	update(booking: IBookingToUpdate) {
-		/*const mock = {
-			"id": id,
-			"date": "2019-09-21",
-			"time": 18,
-			"number_of_guests": 5,
-		};*/
 		axios.post(`http://${urlPath}/api/booking/update.php
 		`, JSON.stringify(booking)
          )

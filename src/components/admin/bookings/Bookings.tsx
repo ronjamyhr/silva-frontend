@@ -1,12 +1,10 @@
 import React from 'react';
 import './Bookings.css';
-import { IBooking } from './../Admin';
 import IBookingToUpdate from './../interfaces/IBooking-to-update';
 import { isTemplateElement } from '@babel/types';
 
-
 interface IBookingsProps {
-	bookingsOnTime: IBooking[];
+	bookingsOnTime: any[]; // Any needed to only need one function @ handleDate()
 	deleteBooking(id: number): any;
 	update(booking: IBookingToUpdate): void;
 }
@@ -35,16 +33,8 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 	}
 	
 	updateBooking(id: number): void {
-/*
-		let booking: IBookingToUpdate = {
-			"id": item.booking_id,
-			"date": item.booking_date,
-			"time": item.sitting_time,
-			"number_of_guests": item.number_of_guests_at_table
-		}*/
 		   
 		let booking = this.state.bookings.find(item => item.booking_id === id);
-		console.log(booking);
 
 		if(booking){
 			let bookingToChange = {
@@ -53,61 +43,36 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 				"time": booking.sitting_time,
 				"number_of_guests": booking.number_of_guests_at_table,
 			};
-			console.log(bookingToChange)
 			this.props.update(bookingToChange);
 
 		}
-		   
-	
-		/*
-		// Set a new state with the updated item
-		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === item.booking_id);
-
-		let newState = Object.assign({}, this.state);
-		newState.bookings[foundIndex].booking_date = "";
-		newState.bookings[foundIndex].sitting_time = 0;
-		newState.bookings[foundIndex].number_of_guests_at_table = 0;
-		this.setState(newState);*/
 
 	}
 
 	handleChangeDate(id: number, e:any){
-		console.log(e.target.value);
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
 		newState.bookings[foundIndex].booking_date = e.target.value;
-		console.log(newState.bookings[foundIndex].booking_date);
 		this.setState(newState);
 	}
 
 	handleChangeTime(id: number, e: any){
-		console.log(e.target.value);
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
 		newState.bookings[foundIndex].sitting_time = parseInt(e.target.value);
-		console.log(newState.bookings[foundIndex].sitting_time);
 		this.setState(newState);
 	}
 
 	handleChangeGuests(id: number, e: any){
-		console.log(e.target.value);
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
 		newState.bookings[foundIndex].number_of_guests_at_table = parseInt(e.target.value);
-		console.log(newState.bookings[foundIndex].number_of_guests_at_table);
 		this.setState(newState);
 	}
 
 	public render() {
 
-/*
-		const bookingList = this.state.bookings.map( item => {
-			return <li key={item.booking_id.toString()}>{item.name_on_booking}
-			<span onClick={this.delete.bind(this, item.booking_id)}>Delete</span>
-			<span onClick={this.updateBooking.bind(this, item)}>Update</span></li>
-		})*/
-
-		const list = this.state.bookings.map( (item, index) => {
+		const list = this.state.bookings.map( item => {
 			
 			return <li key={item.booking_id.toString()}>
 
