@@ -2,13 +2,25 @@
     display: flex;
     justify-content: center;
 }
-label,
-input {
+.book-table-form {
+    width: 60%;
+    margin: 2rem 0;
+}
+.book-table-form input {
     display: block;
     width: 100%;
+    padding-left: 1rem;
+    border-radius: 3px;
+    font-size: 18px;
+    border: 1px solid rgba(191,191,191,0.57);
+    height: 3.5rem;
+    background: #FFF;
+    color: #000;
+    font-weight: 300;
+    margin-top: .5rem;
 }
-form {
-    width: 50%;
+.book-table-form label {
+    display: block;
 }
 .valid {
     border: 1px solid green;
@@ -19,8 +31,35 @@ form {
 .gdpr {
     font-style: italic;
     font-size: .8rem;
+    margin: 1rem 0;
 }
 .gdpr-link {
     color: red;
     text-decoration: none;
+}
+.error-message {
+    color: red;
+    display: block;
+    padding: .5rem 0;
+    font-family: 'Raleway', 'sans-serif';
+}
+.input-box {
+    height: 8rem;
+}
+.customer-submit {
+    cursor: pointer;
+    font-family: 'Raleway', 'sans-serif';
+    text-transform: uppercase;
+    font-size: .8rem;
+    color: #fff;
+    background: #1c2329;
+    letter-spacing: 2px;
+    height: 3.5rem;
+    padding: .5rem;
+    border-radius: 4px;
+    width: 100%;
+}
+.customer-submit:hover {
+    background: #000;
+    transition: 1s;
 }
