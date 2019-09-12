@@ -10,3 +10,17 @@ input {
 form {
     width: 50%;
 }
+.valid {
+    border: 1px solid green;
+}
+.invalid {
+    border: 1px solid red;
+}
+.gdpr {
+    font-style: italic;
+    font-size: .8rem;
+}
+.gdpr-link {
+    color: red;
+    text-decoration: none;
+}

@@ -22,6 +22,10 @@ interface IFormData {
     nameInputError: string,
     emailInputError: string,
     phoneNumberInputError: string,
+    invalidInput: string,
+    validInput: string,
+    validated: string;
+    isValid: boolean;
 }
 
 class BookTable extends React.Component <IDateTime, IFormData> {
@@ -38,12 +42,17 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             time: this.props.dateTime.time,
             nameInputError: '',
             emailInputError: '',
-            phoneNumberInputError: ''
+            phoneNumberInputError: '',
+            invalidInput: 'invalid',
+            validInput: 'valid',
+            validated: '',
+            isValid: false
         }
 
         this.submitFormInputs = this.submitFormInputs.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.validateForm = this.validateForm.bind(this);
+        this.setClassName = this.setClassName.bind(this);
     }
 
     handleInputChange(event: any) {
@@ -102,8 +111,13 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         } as any)
 
         if (nameInput || emailInput || phoneNumberInput) {
+            this.setClassName();
             return false;
         } else {
+            this.setState({
+                isValid: true
+            })
+            this.setClassName();
             return true;
         }
 
@@ -112,6 +126,25 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         // console.log('phone', this.state.phoneNumberInputError);
 
     }
+    validInput() {
+        
+    }
+
+    setClassName() {
+        if (this.state.isValid === false) {
+            // this.setState({
+            //     validated: 'invalid'
+            // })
+            return this.state.invalidInput;
+
+        } else if (this.state.isValid === true) {
+            // this.setState({
+            //     validated: 'valid'
+            // })
+            return this.state.validInput;
+        }
+        // return this.state.validated;
+    } 
 
     submitFormInputs(event: any) {
         event.preventDefault();
@@ -161,15 +194,15 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 			<div className="form-container">
 			  	<form onSubmit={this.submitFormInputs} className="book-table-form">
                     <label htmlFor="name">Namn</label>
-                    <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleInputChange} onBlur={this.validateForm}/>
+                    <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleInputChange} onBlur={this.validateForm} className={this.state.validated}/>
                     <span className="error-message">{this.state.nameInputError}</span>
 
                     <label htmlFor="email">Mailadress</label>
-                    <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleInputChange} onBlur={this.validateForm}/>
+                    <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleInputChange} onBlur={this.validateForm} className={this.state.validated}/>
                     <span className="error-message">{this.state.emailInputError}</span>
 
                     <label htmlFor="phone">Telefonnummer</label>
-                    <input type="text" name="phone_number" id="phone" value={this.state.phone_number} onChange={this.handleInputChange} onBlur={this.validateForm}/>
+                    <input type="text" name="phone_number" id="phone" value={this.state.phone_number} onChange={this.handleInputChange} onBlur={this.validateForm} className={this.state.validated}/>
                     <span className="error-message">{this.state.phoneNumberInputError}</span>
 
                     <label htmlFor="guests">Hur många ska äta?</label>
