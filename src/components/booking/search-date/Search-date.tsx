@@ -1,8 +1,8 @@
 import React from 'react';
 import './Search-date.css';
-import { IBooking } from '../Booking';
 import moment from "moment";
 import Calendar from 'react-calendar';
+import { IBooking } from '../interfaces/IBookings';
 
 export interface IMapBookings {
     bookings: IBooking[];

@@ -4,21 +4,7 @@ import SearchDate from './search-date/Search-date';
 import axios from 'axios';
 import BookTable from './book-table/Book-table';
 import urlPath from '../../config-url';
-
-export interface IBooking {
-    booking_id: number,
-    booking_date: any,
-    sitting_time: any,
-    number_of_guests_at_table: number,
-    name_on_booking: string,
-    email_on_booking: string
-}
-
-export interface IBookings {
-    bookings: IBooking[];
-    showBooking: boolean;
-    dateAndTime: any;
-}
+import { IBookings } from './interfaces/IBookings';
 
 class Booking extends React.Component<{}, IBookings> {
 
@@ -33,7 +19,6 @@ class Booking extends React.Component<{}, IBookings> {
                 date: ""
             }
         }
-
         this.getBookings = this.getBookings.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleDateAndTime = this.handleDateAndTime.bind(this);
