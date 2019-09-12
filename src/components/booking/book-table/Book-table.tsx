@@ -25,8 +25,9 @@ interface IFormData {
     // invalidInput: string,
     // validInput: string,
     // validated: string;
+    isValid: boolean
     invalidForm: string;
-    isDisabled: boolean;
+    isEnabled: boolean;
     touched: {
         name: boolean,
         email: boolean,
@@ -58,8 +59,8 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             // invalidInput: 'invalid',
             // validInput: 'valid',
             // validated: '',
-            // isValid: false,
-            isDisabled: false,
+            isValid: false,
+            isEnabled: false,
             invalidForm: '',
             touched: {
                 name: false,
@@ -89,6 +90,8 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         this.setState({
             [name]: name === 'number_of_guests' ? parseInt(value) : value
         } as any);
+
+        // this.validateForm();
 
     }
 
@@ -135,19 +138,38 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             console.log('phone', phoneNumberInput);
         }
 
+        if (!nameInput || !emailInput || !phoneNumberInput) {
+            this.setState({
+                isValid: true
+            } as any)
+        }
+        console.log('onblur isvalud', this.state.isValid);
         this.setState({
             nameInputError: nameInput,
             emailInputError: emailInput,
             phoneNumberInputError: phoneNumberInput
         } as any)
 
+
     }
 
     validateForm() {
+        const name = this.state.nameInputError;
+        const email = this.state.emailInputError;
+        const phone = this.state.phoneNumberInputError;
+        console.log('consts og stringd', name, email, phone);
 
-        if (this.state.nameInputError || this.state.emailInputError || this.state.phoneNumberInputError) {
+        if (!name || !email || !phone) {
+            this.setState({
+                isEnabled: false
+            } as any)
+            console.log('validateform false', this.state.isEnabled);
             return false;
         } else {
+            this.setState({
+                isEnabled: true
+            } as any)
+            console.log('validateform true', this.state.isEnabled);
             return true;
         }
 
@@ -156,18 +178,17 @@ class BookTable extends React.Component <IDateTime, IFormData> {
     submitFormInputs(event: any) {
         event.preventDefault();
 
-        const formValid = this.validateForm();
-        if (!formValid) {
+        if (!this.state.isValid) {
             this.setState({
-                invalidForm: 'Formuläret är inte korrekt ifyllt.'
+                invalidForm: 'Formuläret är inte korrekt ifyllt'
             })
-        } 
+        }
 
-        this.setState({
-            nameInputError: '',
-            emailInputError: '',
-            phoneNumberInputError: ''
-        } as any)
+        // this.setState({
+        //     nameInputError: '',
+        //     emailInputError: '',
+        //     phoneNumberInputError: ''
+        // } as any)
 
         const customer = {
             name: this.state.name,
@@ -199,9 +220,10 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         console.log('props', this.props.dateTime.date);
         console.log('state', this.state.date);
         console.log('interface', this.props.dateTime.time);
-        const {isDisabled} = this.state;
-        const isEnabled = this.validateForm();
-        
+        // const {isDisabled} = this.state;
+        // const isEnabled = this.validateForm();
+        let isEnabled = this.state.isValid;
+        console.log('correct', isEnabled);
 		return (
 			<div className="form-container">
 			  	<form onSubmit={this.submitFormInputs} className="book-table-form">
@@ -227,7 +249,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                     <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
 
                     <p className="gdpr">Genom att skicka in formuläret så accepterar du <a href="#" className="gdpr-link">våra villkor kring GDPR.</a></p>
-                    <button type="submit" className="customer-submit" disabled={!isEnabled}>Boka bord</button>
+                    <button type="submit" className="customer-submit">Boka bord</button>
                     <span className="error-message">{this.state.invalidForm}</span>
                 </form>
 			</div>
