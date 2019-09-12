@@ -3,6 +3,11 @@ import './Home.css';
 import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
+
+	componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
 	public render() {
 		return (
 			<React.Fragment>

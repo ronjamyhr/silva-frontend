@@ -2,6 +2,11 @@ import React from 'react';
 import './Menu.css';
 
 class Menu extends React.Component {
+
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
     public render() {
         return (
             <React.Fragment>
