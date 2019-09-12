@@ -1,5 +1,6 @@
 import React from 'react';
 import './Search.css';
+import { Link } from 'react-router-dom';
 
 
 interface IMapBookings {
@@ -52,6 +53,7 @@ class Search extends React.Component<IMapBookings> {
                     </div>
                     <button className="admin-button" type="submit">Sök bokning</button>
                 </form>
+                <Link to="/booking"><button className="admin-book-button">Boka bord</button></Link>
             </div>
         );
     }

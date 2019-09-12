@@ -32,6 +32,11 @@
     border-bottom: 1px solid lightgray;
 }
 
+.no-bookings-message {
+    font-size: 0.8rem;
+    padding: 1em;
+    color: darkred;
+}
 
 @media (min-width: 768px) {
 
