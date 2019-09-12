@@ -29,6 +29,7 @@ class Admin extends React.Component<{}, IBookings> {
 	}
 
 	state = {
+
 		bookings: [
 			{
 				booking_id: 0,
@@ -44,7 +45,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	getBookings(date: string, time: number) {
 		// Set correct path in config-url.js
-		axios.get(`http://${urlPath}/booking/get-bookings.php
+		axios.get(`http://${urlPath}/api/booking/get-bookings.php
 		`)
 			.then(res => {
 				this.mapBookings(date, time, res.data);
@@ -52,42 +53,65 @@ class Admin extends React.Component<{}, IBookings> {
 	}
 
 	mapBookings(date: string, time: number, res: any) {
-		let mappedBookings: any = [];
+
+		let mappedBookings: any = [
+
+			{
+				booking_id: 0,
+				booking_date: '',
+				sitting_time: 18,
+				number_of_guests_at_table: 0,
+				name_on_booking: '',
+				email_on_booking: ''
+			}
+
+		];
+
 		res.map((item: any) => {
+
 			if (date == item.booking_date && time == item.sitting_time) {
 				mappedBookings.push(item);
 			}
-			return item;
+
 		})
+
 		this.setState({
 			bookings: mappedBookings
 		});
+
 	}
 
 	deleteBooking(id: number) {
+
 		axios.delete(`http://${urlPath}/api/booking/delete-booking.php
 		`, {
-				"data": {
-					"id": id
-				}
-			})
-			.then(() => {
-				const prevBookings = this.state.bookings;
-				const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
-				this.setState({ bookings: filteredBookings });
-			})
+            "data": {
+                "id": id
+            }
+         })
+		.then( () => {
+			const prevBookings = this.state.bookings;
+			const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
+			this.setState({bookings: filteredBookings});
+			alert("Booking deleted");
+		})
+
 	}
 
 	update(booking: IBookingToUpdate) {
-		axios.post(`http://${urlPath}/booking/update.php
+
+		axios.post(`http://${urlPath}/api/booking/update.php
 		`, JSON.stringify(booking)
-		)
-			.then(function (response) {
-				console.log('saved successfully')
-			});
+         )
+    	.then(function(response){
+			console.log('saved successfully')
+			alert("Booking updated");
+		});
+
 	}
 
 	public render() {
+
 		return (
 			<main className="admin-main">
 				<div className="admin-container">
@@ -99,6 +123,7 @@ class Admin extends React.Component<{}, IBookings> {
 				</div>
 			</main>
 		);
+		
 	}
 }
 

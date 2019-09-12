@@ -1,11 +1,10 @@
 import React from 'react';
 import './Bookings.css';
 import IBookingToUpdate from './../interfaces/IBooking-to-update';
-import { isTemplateElement } from '@babel/types';
 import { IBooking } from '../../booking/Booking';
 
 interface IBookingsProps {
-	bookingsOnTime: IBooking[]; // Any needed to only need one function @ handleDate()
+	bookingsOnTime: IBooking[];
 	deleteBooking(id: number): any;
 	update(booking: IBookingToUpdate): void;
 }
@@ -19,17 +18,20 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 		this.handleChangeGuests = this.handleChangeGuests.bind(this);
 	}
 
-	state = {
-		bookings: this.props.bookingsOnTime,
+	state = {bookings: this.props.bookingsOnTime}
+
+
+	static getDerivedStateFromProps(props: any) {
+		return {
+			bookings: props.bookingsOnTime
+		};
 	}
 
-	componentDidUpdate(nextProps: IBookingsProps) {
-		if (this.props !== nextProps) {
-			this.setState({ bookings: nextProps.bookingsOnTime });
-		}
-	}
 
 	delete(id: number): any {
+		const newState = this.state.bookings;
+		const result = newState.filter(item => item.booking_id !== id);
+		this.setState({bookings: result});
 		this.props.deleteBooking(id);
 	}
 
@@ -45,12 +47,11 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 				"number_of_guests": booking.number_of_guests_at_table,
 			};
 			this.props.update(bookingToChange);
-
 		}
 
 	}
 
-	handleChangeDate(id: number, e: any) {
+	handleChangeDate(id: number, e:any) {
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
 		newState.bookings[foundIndex].booking_date = e.target.value;
@@ -75,27 +76,37 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 
 		const list = this.state.bookings.map(item => {
 
-			return <li className="admin-bookings-list" key={item.booking_id.toString()}>
+			if(item.booking_id !== 0){
 
-				<form className="admin-update-form">
+				return <li className="admin-bookings-list" key={item.booking_id.toString()}>
 
-					<p className="admin-costumer-name">Namn: {item.name_on_booking}</p>
-					<p className="admin-costumer-mail">Email: {item.email_on_booking}</p>
-					<label htmlFor="">Datum:</label>
-					<input type="date" value={item.booking_date} onChange={(e) => this.handleChangeDate(item.booking_id, e)} />
+					<form className="admin-update-form">
 
-					<label htmlFor="">Sittning:</label>
-					<input type="number" value={item.sitting_time} onChange={(e) => this.handleChangeTime(item.booking_id, e)} />
+						<p className="admin-costumer-name">Namn: {item.name_on_booking}</p>
+						<p className="admin-costumer-mail">Email: {item.email_on_booking}</p>
+						<label htmlFor="">Datum:</label>
+						<input type="date" value={item.booking_date} 
+						onChange={(e) => this.handleChangeDate(item.booking_id, e)} />
 
-					<label htmlFor="">Antal gäster:</label>
-					<input type="number" value={item.number_of_guests_at_table} onChange={(e) => this.handleChangeGuests(item.booking_id, e)} />
+						<label htmlFor="">Sittning:</label>
+						<input type="number" value={item.sitting_time} 
+						onChange={(e) => this.handleChangeTime(item.booking_id, e)} />
 
-				</form>
+						<label htmlFor="">Antal gäster:</label>
+						<input type="number" value={item.number_of_guests_at_table} 
+						onChange={(e) => this.handleChangeGuests(item.booking_id, e)} />
 
-				<span className="admin-delete-button" onClick={this.delete.bind(this, item.booking_id)}>Ta bort</span>
-				<span className="admin-update-button" onClick={this.updateBooking.bind(this, item.booking_id)}>Uppdatera</span>
+					</form>
 
-			</li>
+					<span className="admin-delete-button" 
+					onClick={this.delete.bind(this, item.booking_id)}>Ta bort</span>
+					<span className="admin-update-button" 
+					onClick={this.updateBooking.bind(this, item.booking_id)}>Uppdatera</span>
+
+				</li>
+
+			}
+
 		})
 
 		return (
@@ -105,6 +116,7 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 				</ul>
 			</div>
 		);
+
 	}
 }
 
