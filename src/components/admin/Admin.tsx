@@ -4,6 +4,7 @@ import axios from 'axios';
 import Search from './search/Search';
 import Bookings from './bookings/Bookings';
 import urlPath from './../../config-url';
+import IBookingToUpdate from './interfaces/IBooking-to-update';
 
 export interface IBooking {
 	booking_id: number,
@@ -43,7 +44,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	getBookings(date: string, time: number) {
 		// Set correct path in config-url.js
-		axios.get(`http://${urlPath}/booking/get-bookings.php
+		axios.get(`http://${urlPath}/api/booking/get-bookings.php
 		`)
       .then(res => {
 		this.mapBookings(date, time, res.data);
@@ -77,15 +78,9 @@ class Admin extends React.Component<{}, IBookings> {
 		})
 	}
 
-	update(id: number) {
-		const mock = {
-			"id": id,
-			"date": "2019-09-21",
-			"time": 18,
-			"number_of_guests": 5,
-		};
+	update(booking: IBookingToUpdate) {
 		axios.post(`http://${urlPath}/api/booking/update.php
-		`, JSON.stringify(mock)
+		`, JSON.stringify(booking)
          )
     	.then(function(response){
         	console.log('saved successfully')

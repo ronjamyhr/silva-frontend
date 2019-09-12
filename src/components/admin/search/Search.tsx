@@ -51,7 +51,7 @@ class Search extends React.Component<IMapBookings> {
                     </div>
                 </div>
                 
-                <button className="button" type="submit">Sök bord</button>
+                <button className="button" type="submit">Sök bokning</button>
 			</form>
 			</div>
 		);
