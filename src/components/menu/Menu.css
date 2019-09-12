@@ -10,6 +10,7 @@
     position: relative;
     text-align: center;
     color: white;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
     box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
 }
 
@@ -17,6 +18,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
 
@@ -33,14 +36,18 @@
 }
 
 .menu-chef {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin-top: 3em;
+    -ms-flex-line-pack: end;
     align-content: flex-end;
 }
 
 .frame-image {
     width: 200px;
     height: 300px;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
     box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
     overflow: hidden;
 }
@@ -48,10 +55,12 @@
 .image {
     width: 100%;
     height: 100%;
+    -o-object-fit: cover;
     object-fit: cover;
 }
 
 .chef-name {
+    -ms-flex-item-align: end;
     align-self: flex-end;
     font-size: 0.8rem;
     font-style: italic;
