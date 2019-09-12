@@ -29,6 +29,7 @@ class Admin extends React.Component<{}, IBookings> {
 	}
 
 	state = {
+
 		bookings: [
 			{
 				booking_id: 0,
@@ -52,19 +53,24 @@ class Admin extends React.Component<{}, IBookings> {
 	}
 
 	mapBookings(date: string, time: number, res: any) {
+
 		let mappedBookings: any = [];
+
 		res.map( (item: any) => {
 			if(date == item.booking_date && time == item.sitting_time){
 				mappedBookings.push(item);
 			}
 			return item;
 		})
+
 		this.setState({
 			bookings: mappedBookings
 		});
+
 	}
 
 	deleteBooking(id: number) {
+
 		axios.delete(`http://${urlPath}/api/booking/delete-booking.php
 		`, {
             "data": {
@@ -75,19 +81,25 @@ class Admin extends React.Component<{}, IBookings> {
 			const prevBookings = this.state.bookings;
 			const filteredBookings = prevBookings.filter(item => item.booking_id !== id);
 			this.setState({bookings: filteredBookings});
+			alert("Booking deleted");
 		})
+
 	}
 
 	update(booking: IBookingToUpdate) {
+
 		axios.post(`http://${urlPath}/api/booking/update.php
 		`, JSON.stringify(booking)
          )
     	.then(function(response){
-        	console.log('saved successfully')
+			console.log('saved successfully')
+			alert("Booking updated");
 		});
+
 	}
 
 	public render() {
+
 		return (
 			<div>
 
@@ -97,6 +109,7 @@ class Admin extends React.Component<{}, IBookings> {
                 
 			</div>
 		);
+		
 	}
 }
 

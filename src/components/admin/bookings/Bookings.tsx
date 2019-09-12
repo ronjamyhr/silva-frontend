@@ -1,7 +1,6 @@
 import React from 'react';
 import './Bookings.css';
 import IBookingToUpdate from './../interfaces/IBooking-to-update';
-import { isTemplateElement } from '@babel/types';
 import { IBooking } from '../../booking/Booking';
 
 interface IBookingsProps {
@@ -12,7 +11,7 @@ interface IBookingsProps {
 
 class Bookings extends React.Component<IBookingsProps, {}> {
 
-	constructor(props: any){
+	constructor(props: any) {
 		super(props);
 		this.handleChangeDate = this.handleChangeDate.bind(this);
 		this.handleChangeTime = this.handleChangeTime.bind(this);
@@ -20,21 +19,35 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 	}
 
 	state = {
+
 		bookings: this.props.bookingsOnTime,
+
 	}
 
-	componentDidUpdate(nextProps: IBookingsProps) {
-		if (this.props !== nextProps) {
-			this.setState({ bookings: nextProps.bookingsOnTime }); 
+
+	static getDerivedStateFromProps(props: any) {
+
+		if(props.bookingsOnTime[0].booking_id === 0){
+			return {
+				bookings: []
+			};
+		} else {
+			return {
+				bookings: props.bookingsOnTime
+			};
 		}
+
 	}
 
 	delete(id: number): any {
-        this.props.deleteBooking(id);
+		const newState = this.state.bookings;
+		const result = newState.filter(item => item.booking_id !== id);
+		this.setState({bookings: result});
+		this.props.deleteBooking(id);
 	}
 	
 	updateBooking(id: number): void {
-		   
+
 		let booking = this.state.bookings.find(item => item.booking_id === id);
 
 		if(booking){
@@ -45,26 +58,25 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 				"number_of_guests": booking.number_of_guests_at_table,
 			};
 			this.props.update(bookingToChange);
-
 		}
 
 	}
 
-	handleChangeDate(id: number, e:any){
+	handleChangeDate(id: number, e:any) {
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
 		newState.bookings[foundIndex].booking_date = e.target.value;
 		this.setState(newState);
 	}
 
-	handleChangeTime(id: number, e: any){
+	handleChangeTime(id: number, e: any) {
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
 		newState.bookings[foundIndex].sitting_time = parseInt(e.target.value);
 		this.setState(newState);
 	}
 
-	handleChangeGuests(id: number, e: any){
+	handleChangeGuests(id: number, e: any) {
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
 		newState.bookings[foundIndex].number_of_guests_at_table = parseInt(e.target.value);
@@ -95,6 +107,7 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 				<span onClick={this.updateBooking.bind(this, item.booking_id)}>Update</span>
 
 			</li>
+
 		})
 
 		return (
@@ -106,6 +119,7 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 
 			</div>
 		);
+
 	}
 }
 
