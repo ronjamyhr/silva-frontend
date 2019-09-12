@@ -22,10 +22,11 @@ interface IFormData {
     nameInputError: string,
     emailInputError: string,
     phoneNumberInputError: string,
-    invalidInput: string,
-    validInput: string,
-    validated: string;
-    isValid: boolean;
+    // invalidInput: string,
+    // validInput: string,
+    // validated: string;
+    invalidForm: string;
+    isDisabled: boolean;
     touched: {
         name: boolean,
         email: boolean,
@@ -54,10 +55,12 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             nameInputError: '',
             emailInputError: '',
             phoneNumberInputError: '',
-            invalidInput: 'invalid',
-            validInput: 'valid',
-            validated: '',
-            isValid: false,
+            // invalidInput: 'invalid',
+            // validInput: 'valid',
+            // validated: '',
+            // isValid: false,
+            isDisabled: false,
+            invalidForm: '',
             touched: {
                 name: false,
                 email: false,
@@ -74,10 +77,12 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         this.submitFormInputs = this.submitFormInputs.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.validateForm = this.validateForm.bind(this);
-        this.setClassName = this.setClassName.bind(this);
+
+        this.handleOnBlur = this.handleOnBlur.bind(this);
     }
 
     handleInputChange(event: any) {
+        event.preventDefault();
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         const name = event.target.name;
             
@@ -87,17 +92,17 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 
     }
 
-    validateForm(event: any) {
+    handleOnBlur(event: any) {
         event.preventDefault();
-
         const { name, value } = event.target;
-        let emailRegEx = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/;
-        let specialCharactersRegEx = /\`|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:/;
-        let phoneNumberRegEx = /^(\(?\+?[0-9]*\)?)?[0-9_\- ]/;
 
         this.setState({
             touched: { ...this.state.touched, [name]: true }
         })
+
+        let emailRegEx = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/;
+        let specialCharactersRegEx = /\`|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:/;
+        let phoneNumberRegEx = /^[0-9]*$/;
 
         let nameInput = '';
         let emailInput = '';
@@ -123,9 +128,9 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         
         if (name === 'phone_number') {
             if (value.length < 8) {
-                phoneNumberInput = 'Telefonnumret måste innehålla minst 8 siffor';
-            } else if (phoneNumberRegEx.test(value)) {
-                phoneNumberInput = 'Telefonnumret får bara innehålla siffror och mellanslag';
+                phoneNumberInput = 'Telefonnumret måste innehålla minst 8 siffor.';
+            } else if (!phoneNumberRegEx.test(value)) {
+                phoneNumberInput = 'Telefonnumret får bara innehålla siffror.';
             } 
             console.log('phone', phoneNumberInput);
         }
@@ -136,45 +141,33 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             phoneNumberInputError: phoneNumberInput
         } as any)
 
-        if (nameInput || emailInput || phoneNumberInput) {
-            this.setClassName();
+    }
+
+    validateForm() {
+
+        if (this.state.nameInputError || this.state.emailInputError || this.state.phoneNumberInputError) {
             return false;
         } else {
-            this.setState({
-                isValid: true
-            })
-            this.setClassName();
             return true;
         }
 
-
     }
-    // validInput() {
-        
-    // }
-
-    setClassName() {
-        if (this.state.isValid === false) {
-            // this.setState({
-            //     validated: 'invalid'
-            // })
-            return this.state.invalidInput;
-
-        } else if (this.state.isValid === true) {
-            // this.setState({
-            //     validated: 'valid'
-            // })
-            return this.state.validInput;
-        }
-        // return this.state.validated;
-    } 
 
     submitFormInputs(event: any) {
         event.preventDefault();
 
-        // if(!this.validateForm()) {
-        //     return;
-        // }
+        const formValid = this.validateForm();
+        if (!formValid) {
+            this.setState({
+                invalidForm: 'Formuläret är inte korrekt ifyllt.'
+            })
+        } 
+
+        this.setState({
+            nameInputError: '',
+            emailInputError: '',
+            phoneNumberInputError: ''
+        } as any)
 
         const customer = {
             name: this.state.name,
@@ -206,34 +199,36 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         console.log('props', this.props.dateTime.date);
         console.log('state', this.state.date);
         console.log('interface', this.props.dateTime.time);
-        
+        const {isDisabled} = this.state;
+        const isEnabled = this.validateForm();
         
 		return (
 			<div className="form-container">
 			  	<form onSubmit={this.submitFormInputs} className="book-table-form">
                     <div className="input-box"> 
                         <label htmlFor="name">Namn</label>
-                        <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleInputChange} onBlur={this.validateForm} className="customer-input"/>
+                        <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
                         <span className="error-message">{this.state.nameInputError}</span>
                     </div>
 
                     <div className="input-box"> 
                         <label htmlFor="email">Mailadress</label>
-                        <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleInputChange} onBlur={this.validateForm} className="customer-input"/>
+                        <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
                         <span className="error-message">{this.state.emailInputError}</span>
                     </div>
 
                     <div className="input-box">
                         <label htmlFor="phone">Telefonnummer</label>
-                        <input type="text" name="phone_number" id="phone" value={this.state.phone_number} onChange={this.handleInputChange} onBlur={this.validateForm} className="customer-input"/>
+                        <input type="text" name="phone_number" id="phone" value={this.state.phone_number} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
                         <span className="error-message">{this.state.phoneNumberInputError}</span>
                     </div>
 
                     <label htmlFor="guests">Hur många ska äta?</label>
-                    <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.validateForm} className="customer-input"/>
+                    <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
 
                     <p className="gdpr">Genom att skicka in formuläret så accepterar du <a href="#" className="gdpr-link">våra villkor kring GDPR.</a></p>
-                    <button type="submit" className="customer-submit">Boka bord</button>
+                    <button type="submit" className="customer-submit" disabled={!isEnabled}>Boka bord</button>
+                    <span className="error-message">{this.state.invalidForm}</span>
                 </form>
 			</div>
 		);

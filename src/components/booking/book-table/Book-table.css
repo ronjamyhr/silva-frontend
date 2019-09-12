@@ -38,7 +38,7 @@
     text-decoration: none;
 }
 .error-message {
-    color: red;
+    color: #7F0000;
     display: block;
     padding: .5rem 0;
     font-family: 'Raleway', 'sans-serif';
