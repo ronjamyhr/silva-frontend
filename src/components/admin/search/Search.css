@@ -1,0 +1,57 @@
+.container-admin-search {
+    padding: 2em;
+    min-width: 80vw;
+}
+
+.label-bookings,
+.label-search-time {
+    font-size: 1.1rem;
+    font-family: Raleway;
+    margin: .5em 0;
+}
+
+.admin-checkbox-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 1em 0;
+}
+
+.admin-checkbox-left,
+.admin-checkbox-right {
+    font-size: 1rem;
+    font-family: Raleway;
+    margin: 0 1em;
+}
+
+.admin-checkbox-left input,
+.admin-checkbox-right input {
+    margin: .5em 0;
+}
+
+.admin-button {
+    font-size: 1.1rem;
+    font-family: Raleway;
+    background-color: #1c2329;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    padding: .5em 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.admin-search-form input[type="date"i] {
+    font-family: Raleway;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+
+    .container-admin-search {
+        min-width: 50vw;
+    }
+}
