@@ -2,14 +2,14 @@ import React from 'react';
 import './Search-date.css';
 import moment from "moment";
 import Calendar from 'react-calendar';
-import { IBooking } from '../interfaces/IBookings';
+import { IBooking } from '../../../interfaces/IBookings';
 
-export interface IMapBookings {
+interface IPropsSearch {
     bookings: IBooking[];
     timeSelected(date: string, thetime: number): void;
 }
 
-interface IState {
+interface IStateSearch {
     date: Date;
     firstSitting: any;
     secondSitting: any;
@@ -17,9 +17,9 @@ interface IState {
     currentDate: Date;
 }
 
-class SearchDate extends React.Component<IMapBookings, IState> {
+class SearchDate extends React.Component<IPropsSearch, IStateSearch> {
 
-    constructor(props: IMapBookings) {
+    constructor(props: IPropsSearch) {
         super(props);
 
         this.state = {

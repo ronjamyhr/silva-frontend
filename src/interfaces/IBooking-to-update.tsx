@@ -4,5 +4,3 @@ export interface IBookingToUpdate {
     time: number;
     number_of_guests: number;
 }
-
-export default IBookingToUpdate;

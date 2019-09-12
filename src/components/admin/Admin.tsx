@@ -4,25 +4,12 @@ import axios from 'axios';
 import Search from './search/Search';
 import Bookings from './bookings/Bookings';
 import urlPath from './../../config-url';
-import IBookingToUpdate from './interfaces/IBooking-to-update';
+import { IBookingToUpdate } from '../../interfaces/IBooking-to-update';
+import { IStateAdminBookings } from '../../interfaces/IBookings';
 
-export interface IBooking {
-	booking_id: number,
-	booking_date: string,
-	sitting_time: number,
-	number_of_guests_at_table: number,
-	name_on_booking: string,
-	email_on_booking: string
-}
+class Admin extends React.Component<{}, IStateAdminBookings> {
 
-export interface IBookings {
-	bookings: IBooking[];
-	showBooking: boolean;
-}
-
-class Admin extends React.Component<{}, IBookings> {
-
-	constructor(props: any) {
+	constructor(props: IStateAdminBookings) {
 		super(props);
 		this.getBookings = this.getBookings.bind(this);
 		this.mapBookings = this.mapBookings.bind(this);
