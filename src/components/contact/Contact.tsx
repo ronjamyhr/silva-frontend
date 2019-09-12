@@ -3,6 +3,11 @@ import './Contact.css';
 
 
 class Contact extends React.Component {
+
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
     public render() {
         return (
             <React.Fragment>

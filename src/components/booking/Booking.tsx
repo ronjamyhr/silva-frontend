@@ -41,6 +41,8 @@ class Booking extends React.Component<{}, IBookings> {
 
     componentDidMount() {
         this.getBookings();
+        window.scrollTo(0, 0);
+        
     }
 
     // get all bookings from db
