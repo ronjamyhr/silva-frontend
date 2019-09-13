@@ -27,21 +27,11 @@ class Admin extends React.Component<{}, IBookings> {
 		this.getBookings = this.getBookings.bind(this);
 		this.mapBookings = this.mapBookings.bind(this);
 		this.deleteBooking = this.deleteBooking.bind(this);
-	}
 
-	state = {
-
-		bookings: [
-			{
-				booking_id: 0,
-				booking_date: '',
-				sitting_time: 18,
-				number_of_guests_at_table: 0,
-				name_on_booking: '',
-				email_on_booking: ''
-			}
-		],
-		showBooking: false
+		this.state = {
+			bookings: [],
+			showBooking: false
+		}
 	}
 
 	getBookings(date: string, time: number) {
@@ -55,18 +45,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	mapBookings(date: string, time: number, res: any) {
 
-		let mappedBookings: any = [
-
-			{
-				booking_id: 0,
-				booking_date: '',
-				sitting_time: 18,
-				number_of_guests_at_table: 0,
-				name_on_booking: '',
-				email_on_booking: ''
-			}
-
-		];
+		let mappedBookings: any = [];
 
 		res.map((item: any) => {
 
@@ -74,9 +53,6 @@ class Admin extends React.Component<{}, IBookings> {
 				mappedBookings.push(item);
 			}
 		})
-
-		console.log('map booking längd', mappedBookings.length);
-
 
 		this.setState({
 			bookings: mappedBookings,
@@ -115,9 +91,6 @@ class Admin extends React.Component<{}, IBookings> {
 	}
 
 	public render() {
-
-		console.log(this.state.bookings.length);
-
 		return (
 			<main className="admin-main">
 				<div className="admin-container">
@@ -125,7 +98,8 @@ class Admin extends React.Component<{}, IBookings> {
 						<h1>Admin</h1>
 					</div>
 					<Search getBookings={this.getBookings} />
-					{this.state.bookings.length <= 1 && this.state.showBooking === true ? <p className="no-bookings-message">Det finns inga bokningar det valda datumet.</p> : <Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking} update={this.update} />}
+					{this.state.bookings.length <= 0 && this.state.showBooking === true ? <p className="no-bookings-message">Det finns inga bokningar det valda datumet.</p> : 
+					<Bookings bookingsOnTime={this.state.bookings} deleteBooking={this.deleteBooking} update={this.update} />}
 				</div>
 			</main>
 		);

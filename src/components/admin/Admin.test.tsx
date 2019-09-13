@@ -16,25 +16,17 @@ describe('Admin ', () => {
     it('has a state of bookings', () =>   {
         const wrapper = shallow(<Admin/>);
         expect(wrapper.state()).toEqual({
-            bookings: [
-                {
-                    booking_id: 0,
-                    booking_date: '',
-                    sitting_time: 18,
-                    number_of_guests_at_table: 0,
-                    name_on_booking: '',
-                    email_on_booking: ''
-                }
-            ]
+            bookings: [],
+            showBooking: false
         });
     });
 
     describe('Booking component ', () => {
-        it('has props of parents state', () => {
+        it('has props from parents state', () => {
             const wrapper = shallow(<Admin/>);
             wrapper.update(); 
-            const bookingsOnTime = wrapper.find(Bookings);
-            expect({bookings: bookingsOnTime.props().bookingsOnTime}).toEqual(wrapper.state());
+            const bookings = wrapper.find(Bookings);
+            expect(bookings.props().bookingsOnTime).toEqual(wrapper.state('bookings'));
         });
     });
     
