@@ -24,14 +24,6 @@ interface IFormData {
     emailInputError: string,
     phoneNumberInputError: string,
     isValid: boolean
-    // invalidForm: string;
-    // isEnabled: boolean;
-    // touched: {
-    //     name: boolean,
-    //     email: boolean,
-    //     phone_number: boolean,
-    //     guests: boolean
-    // }
     hasErrors: {
         name: boolean,
         email: boolean,
@@ -54,18 +46,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             nameInputError: '',
             emailInputError: '',
             phoneNumberInputError: '',
-            // invalidInput: 'invalid',
-            // validInput: 'valid',
-            // validated: '',
             isValid: false,
-            // isEnabled: false,
-            // invalidForm: '',
-            // touched: {
-            //     name: false,
-            //     email: false,
-            //     phone_number: false,
-            //     guests: false
-            // },
             hasErrors: {
                 name: false,
                 email: false,
@@ -75,7 +56,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 
         this.submitFormInputs = this.submitFormInputs.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-
         this.handleOnBlur = this.handleOnBlur.bind(this);
     }
 
@@ -84,38 +64,33 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         const name = event.target.name;
             
+        //convert guest string to integer before stting state from input
         this.setState({
             [name]: name === 'number_of_guests' ? parseInt(value) : value
         } as any);
-
-        console.log('guests', this.state.number_of_guests);
 
     }
 
     handleOnBlur = (event: any) => {
         event.preventDefault();
+        //event.target and event.target.value
         const { name, value } = event.target;
-
-        // this.setState({
-        //     touched: { ...this.state.touched, [name]: true }
-        // })
-        // console.log('name after setsatet touched true', this.state.touched.name);
 
         let emailRegEx = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/;
         let specialCharactersRegEx = /\`|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:/;
         let phoneNumberRegEx = /^[0-9]*$/;
 
+        //keep showing validation message if already set on previous blur
         let nameInput = this.state.nameInputError;
         let emailInput = this.state.emailInputError;
         let phoneNumberInput = this.state.phoneNumberInputError;
 
-        let errors: any = this.state.hasErrors;
-
-        console.log("Current state: ", this.state.hasErrors);  
+        let errors: any = this.state.hasErrors; 
 
         if (name === 'name') {
             errors.name = false;
             nameInput= '';
+
             if (value == '') {
                 nameInput = 'Du måste ange ditt namn.';
                 errors.name = true;
@@ -124,7 +99,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                 nameInput = 'Namn får bara innehålla bokstäver och mellanslag.';
                 errors.name = true;
             }  
-            console.log('name', nameInput);
         }
         
         if (name === 'email') {
@@ -139,7 +113,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                 emailInput = 'E-posten är felaktig.';
                 errors.email = true;
             } 
-            console.log('email', emailInput);
         }
         
         if (name === 'phone_number') {
@@ -154,7 +127,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                 phoneNumberInput = 'Telefonnumret får bara innehålla siffror.';
                 errors.phone_number = true;
             } 
-            console.log('phone', phoneNumberInput);
         }
 
         let validForm = false;
@@ -166,7 +138,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         if (this.state.name === '' || this.state.email === '' || this.state.phone_number === '') {
             validForm = false;
         }
-        
         
         this.setState({
             nameInputError: nameInput,
@@ -182,9 +153,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
     submitFormInputs = (event: any) => {
         event.preventDefault();
 
-        console.log('guests', this.state.number_of_guests);
-
-
         const customer = {
             name: this.state.name,
             email: this.state.email,
@@ -196,25 +164,19 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 
         axios.post(`http://${urlPath}/api/booking/register-customer-book-table.php`, JSON.stringify(customer))
         .then(result => {
-            console.log(result);
-            console.log(result.data);
+            // console.log(result.data);
         })
         .catch(error => {
-            console.log(error);
+            // console.log(error);
             
         })
         
         //send data to confirmation component
         this.props.customerInfo(this.state.name, this.state.date, this.state.time);
-
     }
 
     
-
 	public render() {
-
-        
-        console.log('correct: ', this.state.isValid);
 		return (
 			<div className="form-container">
 			  	<form onSubmit={this.submitFormInputs} className="book-table-form">
@@ -237,7 +199,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                     </div>
 
                     <label htmlFor="guests">Hur många ska äta?</label>
-                    {/* <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/> */}
                     <select name="number_of_guests" id="guests" onChange={this.handleInputChange} value={this.state.number_of_guests} className="customer-input">
                         <option value="1">1</option>
                         <option value="2">2</option>

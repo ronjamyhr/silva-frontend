@@ -4,7 +4,7 @@
 }
 .book-table-form {
     width: 60%;
-    margin: 2rem 0;
+    margin: 2rem 0 4rem 0;
 }
 .book-table-form input,
 .book-table-form select {
@@ -33,12 +33,11 @@
 .gdpr {
     font-style: italic;
     font-size: .8rem;
-    margin: 1rem 0;
+    margin: 2rem 0 1rem 0;
 }
 .gdpr-link {
     color: red;
     text-decoration: none;
-    margin-top: .5rem;
 }
 .error-message {
     color: #7F0000;
