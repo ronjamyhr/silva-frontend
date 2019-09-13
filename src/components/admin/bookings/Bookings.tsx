@@ -9,16 +9,20 @@ interface IBookingsProps {
 	update(booking: IBookingToUpdate): void;
 }
 
-class Bookings extends React.Component<IBookingsProps, {}> {
+interface IBookingsState {
+	bookings: IBooking[];
+}
+
+class Bookings extends React.Component<IBookingsProps, IBookingsState> {
 
 	constructor(props: IBookingsProps) {
 		super(props);
-		this.handleChangeDate = this.handleChangeDate.bind(this);
-		this.handleChangeTime = this.handleChangeTime.bind(this);
-		this.handleChangeGuests = this.handleChangeGuests.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.state = {
+			bookings: this.props.bookingsOnTime
+		}
 	}
 
-	state = { bookings: this.props.bookingsOnTime }
 
 	static getDerivedStateFromProps(props: any) {
 		return {
@@ -48,32 +52,22 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 		}
 	}
 
-	handleChangeDate(id: number, e: any) {
+	handleChange(id: number, property: any, e: any) {
 		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
 		let newState = Object.assign({}, this.state);
-		newState.bookings[foundIndex].booking_date = e.target.value;
-		this.setState(newState);
-	}
-
-	handleChangeTime(id: number, e: any) {
-		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
-		let newState = Object.assign({}, this.state);
-		newState.bookings[foundIndex].sitting_time = parseInt(e.target.value);
-		this.setState(newState);
-	}
-
-	handleChangeGuests(id: number, e: any) {
-		let foundIndex = this.props.bookingsOnTime.findIndex(obj => obj.booking_id === id);
-		let newState = Object.assign({}, this.state);
-		newState.bookings[foundIndex].number_of_guests_at_table = parseInt(e.target.value);
+		if(property === "date"){
+			newState.bookings[foundIndex].booking_date = e.target.value;
+		} else if (property === "sitting_time") {
+			newState.bookings[foundIndex].sitting_time = parseInt(e.target.value);
+		} else if (property === "number_of_guests") {
+			newState.bookings[foundIndex].number_of_guests_at_table = parseInt(e.target.value);
+		}
 		this.setState(newState);
 	}
 
 	public render() {
 
-		const list = this.state.bookings.map(item => {
-
-			if (item.booking_id !== 0) {
+		const list = this.props.bookingsOnTime.map(item => {
 
 				return <li className="admin-bookings-list" key={item.booking_id.toString()}>
 
@@ -81,16 +75,17 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 						<p className="admin-costumer-name">Namn: {item.name_on_booking}</p>
 						<p className="admin-costumer-mail">Email: {item.email_on_booking}</p>
 						<label htmlFor="">Datum:</label>
-						<input type="date" value={item.booking_date}
-							onChange={(e) => this.handleChangeDate(item.booking_id, e)} />
+						<input type="date" value={item.booking_date} 
+						onChange={(e) => this.handleChange(item.booking_id, "date", e)} />
 
 						<label htmlFor="">Sittning:</label>
-						<input type="number" value={item.sitting_time}
-							onChange={(e) => this.handleChangeTime(item.booking_id, e)} />
+						<input type="number" value={item.sitting_time} 
+						onChange={(e) => this.handleChange(item.booking_id, "sitting_time", e)} />
 
 						<label htmlFor="">Antal gäster:</label>
-						<input type="number" value={item.number_of_guests_at_table}
-							onChange={(e) => this.handleChangeGuests(item.booking_id, e)} />
+						<input type="number" value={item.number_of_guests_at_table} 
+						onChange={(e) => this.handleChange(item.booking_id, "number_of_guests", e)} />
+
 					</form>
 
 					<span className="admin-delete-button"
@@ -100,7 +95,6 @@ class Bookings extends React.Component<IBookingsProps, {}> {
 
 				</li>
 
-			}
 		})
 
 		return (
