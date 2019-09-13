@@ -44,7 +44,7 @@ class Booking extends React.Component<{}, IStateBookings> {
     componentDidMount() {
         this.getBookings();
         window.scrollTo(0, 0);
-        
+
     }
 
     // get all bookings from db
@@ -73,6 +73,8 @@ class Booking extends React.Component<{}, IStateBookings> {
             showBooking: true,
         });
     }
+
+    // set form values from booking as state 
     handleCustomerInfo(name: string, date: string, time: number) {
 
         this.setState(prevState => {
@@ -91,23 +93,20 @@ class Booking extends React.Component<{}, IStateBookings> {
 
 
     public render() {
-        console.log('showbooking', this.state.showBooking);
-        console.log('showconfirm', this.state.showConfirm);
-        
 
         let bookTable: JSX.Element = (<div></div>);
         if (!this.state.showBooking || !this.state.showConfirm) {
             bookTable = (<SearchDate bookings={this.state.bookings} timeSelected={this.handleDateAndTime} />);
         }
         if (this.state.showBooking) {
-            bookTable = (<BookTable customerInfo={this.handleCustomerInfo} dateTime={this.state.dateAndTime}/>);
+            bookTable = (<BookTable customerInfo={this.handleCustomerInfo} dateTime={this.state.dateAndTime} />);
 
         }
-        if (this.state.showConfirm  && !this.state.showBooking) {
-            bookTable = (<BookTable customerInfo={this.handleCustomerInfo} dateTime={this.state.dateAndTime}/>);
+        if (this.state.showConfirm && !this.state.showBooking) {
+            bookTable = (<BookTable customerInfo={this.handleCustomerInfo} dateTime={this.state.dateAndTime} />);
         }
         if (this.state.showConfirm && !this.state.showBooking) {
-            bookTable = (<Confirmation customerInfo={this.state.customerDetails}/>);
+            bookTable = (<Confirmation customerInfo={this.state.customerDetails} />);
         }
 
 
@@ -118,9 +117,7 @@ class Booking extends React.Component<{}, IStateBookings> {
                         <div className="headline">
                             <h1>Boka bord</h1>
                         </div>
-
-                            {bookTable}
-
+                        {bookTable}
                     </div>
                 </main>
             </React.Fragment>

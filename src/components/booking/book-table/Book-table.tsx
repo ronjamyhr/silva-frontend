@@ -186,6 +186,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
     submitFormInputs(event: any) {
         event.preventDefault();
 
+
         // if (!this.state.isValid) {
         //     // this.setState({
         //     //     invalidForm: 'Formuläret är inte korrekt ifyllt'

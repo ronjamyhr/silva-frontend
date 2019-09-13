@@ -31,13 +31,13 @@ class Confirmation extends React.Component <IBookingDetail, IBookingState > {
 	public render() {
 		return (
 			<React.Fragment>
-				<h1 className="confirm-heading">Bokningsbekräftelse</h1>
 				<div className="confirm-container">
-					<h2>Tack {this.state.name} för din bokning!</h2>
-					<p>Du har nu bokat bord hos oss den {this.state.date} kl: {this.state.time}</p>
-					<p>Vi på Silva önskar er varmt välkomna!</p>
+				<h2 className="confirm-heading">Bokningsbekräftelse</h2>
+					<p>Tack {this.state.name} för din bokning!</p>
+					<p className="confirm-date-time-text">Du har nu bokat bord hos oss den {this.state.date} kl: {this.state.time}.00</p>
+					<p className="confirm-welcome-text">Vi på Silva önskar er varmt välkomna!</p>
 					<p>Avbokning sker via mejl eller telefon</p>
-					<p>(MEJL) och (TELE)</p>
+					<p>silva@mail.se och +46 123 456</p>
 				</div>
 			</React.Fragment>
 		);
