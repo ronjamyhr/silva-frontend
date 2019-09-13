@@ -10,9 +10,9 @@ import NotFound from './components/not-found/Not-found';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('routes using memory router', () => {
+  window.scrollTo = jest.fn();
 
   it('should show Home component for / router (using memory router)', () => {
-
     const component = mount( <MemoryRouter initialEntries = {['/']} >
         <App/>
       </MemoryRouter>

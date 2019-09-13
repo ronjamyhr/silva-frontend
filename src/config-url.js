@@ -1,4 +1,4 @@
 
-const urlPath = "localhost:8888/FED18/JavaScript/silva-backend";
+const urlPath = "localhost/silva-backend";
 
 export default urlPath;
