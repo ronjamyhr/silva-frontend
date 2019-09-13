@@ -8,6 +8,7 @@ import Bookings from './bookings/Bookings';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Admin ', () => {
+    window.scrollTo = jest.fn();
 
     it('renders without crashing', () => {
         shallow(<Admin />);
@@ -23,7 +24,7 @@ describe('Admin ', () => {
 
     describe('Booking component ', () => {
         it('has props from parents state', () => {
-            const wrapper = shallow(<Admin/>);
+            const wrapper = shallow<Admin>(<Admin />);
             wrapper.update(); 
             const bookings = wrapper.find(Bookings);
             expect(bookings.props().bookingsOnTime).toEqual(wrapper.state('bookings'));
