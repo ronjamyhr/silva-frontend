@@ -78,10 +78,6 @@ class Admin extends React.Component<{}, IStateAdminBookings> {
 	}
 
 	public render() {
-<<<<<<< HEAD
-=======
-
->>>>>>> e71adc1dba3d877cbdc4ea0838bc6f5bc68ed3e1
 		return (
 			<main className="admin-main">
 				<div className="admin-container">
