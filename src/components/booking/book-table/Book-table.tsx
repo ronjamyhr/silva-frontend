@@ -181,7 +181,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         if (!this.state.isValid) {
             // this.setState({
             //     invalidForm: 'Formuläret är inte korrekt ifyllt'
-            // });
+            // 
 
             return;
         }
