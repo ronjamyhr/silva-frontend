@@ -79,7 +79,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         this.handleOnBlur = this.handleOnBlur.bind(this);
     }
 
-    handleInputChange(event: any) {
+    handleInputChange = (event: any) => {
         event.preventDefault();
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         const name = event.target.name;
@@ -92,7 +92,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 
     }
 
-    handleOnBlur(event: any) {
+    handleOnBlur = (event: any) => {
         event.preventDefault();
         const { name, value } = event.target;
 
@@ -176,12 +176,10 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             isValid: validForm
         })
 
-       
-
     }
 
 
-    submitFormInputs(event: any) {
+    submitFormInputs = (event: any) => {
         event.preventDefault();
 
         console.log('guests', this.state.number_of_guests);
@@ -206,9 +204,8 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             
         })
         
-        //send data to parent
+        //send data to confirmation component
         this.props.customerInfo(this.state.name, this.state.date, this.state.time);
-        console.log('sendbook', this.state.name);
 
     }
 
