@@ -4,7 +4,7 @@ import SearchDate from './search-date/Search-date';
 import axios from 'axios';
 import BookTable from './book-table/Book-table';
 import urlPath from '../../config-url';
-import { IStateBookings } from '../../interfaces/IBookings';
+import { IStateBookings } from '../../interfaces/booking/IBookings';
 
 class Booking extends React.Component<{}, IStateBookings> {
 
@@ -41,7 +41,7 @@ class Booking extends React.Component<{}, IStateBookings> {
 
     // get all bookings from db
     getBookings() {
-        axios.get(`http://${urlPath}/booking/get-bookings.php`)
+        axios.get(`http://${urlPath}/api/booking/get-bookings.php`)
             .then((result: any) => {
                 this.setState({
                     bookings: result.data

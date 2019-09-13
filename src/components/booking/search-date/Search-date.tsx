@@ -2,7 +2,7 @@ import React from 'react';
 import './Search-date.css';
 import moment from "moment";
 import Calendar from 'react-calendar';
-import { IBooking } from '../../../interfaces/IBookings';
+import { IBooking } from '../../../interfaces/booking/IBookings';
 
 interface IPropsSearch {
     bookings: IBooking[];

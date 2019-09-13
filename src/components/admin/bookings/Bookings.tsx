@@ -1,7 +1,7 @@
 import React from 'react';
 import './Bookings.css';
-import { IBookingToUpdate } from '../../../interfaces/IBooking-to-update';
-import { IBooking } from '../../../interfaces/IBookings';
+import { IBookingToUpdate } from '../../../interfaces/admin/IBooking-to-update';
+import { IBooking } from '../../../interfaces/booking/IBookings';
 
 interface IBookingsProps {
 	bookingsOnTime: IBooking[];
