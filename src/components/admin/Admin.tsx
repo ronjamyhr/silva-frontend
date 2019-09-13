@@ -4,25 +4,12 @@ import axios from 'axios';
 import Search from './search/Search';
 import Bookings from './bookings/Bookings';
 import urlPath from './../../config-url';
-import IBookingToUpdate from './interfaces/IBooking-to-update';
+import { IBookingToUpdate } from '../../interfaces/admin/IBooking-to-update';
+import { IStateAdminBookings } from '../../interfaces/booking/IBookings';
 
-export interface IBooking {
-	booking_id: number,
-	booking_date: string,
-	sitting_time: number,
-	number_of_guests_at_table: number,
-	name_on_booking: string,
-	email_on_booking: string
-}
+class Admin extends React.Component<{}, IStateAdminBookings> {
 
-export interface IBookings {
-	bookings: IBooking[];
-	showBooking: boolean;
-}
-
-class Admin extends React.Component<{}, IBookings> {
-
-	constructor(props: any) {
+	constructor(props: IStateAdminBookings) {
 		super(props);
 		this.getBookings = this.getBookings.bind(this);
 		this.mapBookings = this.mapBookings.bind(this);
@@ -46,7 +33,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	getBookings(date: string, time: number) {
 		// Set correct path in config-url.js
-		axios.get(`http://${urlPath}/booking/get-bookings.php
+		axios.get(`http://${urlPath}/api/booking/get-bookings.php
 		`)
 			.then(res => {
 				this.mapBookings(date, time, res.data);
@@ -75,9 +62,6 @@ class Admin extends React.Component<{}, IBookings> {
 			}
 		})
 
-		console.log('map booking längd', mappedBookings.length);
-
-
 		this.setState({
 			bookings: mappedBookings,
 			showBooking: true
@@ -87,7 +71,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	deleteBooking(id: number) {
 
-		axios.delete(`http://${urlPath}/booking/delete-booking.php
+		axios.delete(`http://${urlPath}/api/booking/delete-booking.php
 		`, {
 				"data": {
 					"id": id
@@ -104,7 +88,7 @@ class Admin extends React.Component<{}, IBookings> {
 
 	update(booking: IBookingToUpdate) {
 
-		axios.post(`http://${urlPath}/booking/update.php
+		axios.post(`http://${urlPath}/api/booking/update.php
 		`, JSON.stringify(booking)
 		)
 			.then(function (response) {
@@ -115,8 +99,6 @@ class Admin extends React.Component<{}, IBookings> {
 	}
 
 	public render() {
-
-		console.log(this.state.bookings.length);
 
 		return (
 			<main className="admin-main">
