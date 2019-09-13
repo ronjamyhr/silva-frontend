@@ -14,9 +14,10 @@
 }
 
 .calendar .react-calendar {
-    font-family: "Raleway";
+    font-family: 'Raleway', 'sans-serif';
     margin: 0 auto;
     border: 1px solid lightgrey;
+    margin-bottom: 3rem;
 }
 
 .calendar .react-calendar__tile--active,
@@ -29,7 +30,7 @@
 }
 
 .calendar .react-calendar__navigation__label {
-    font-family: "Raleway";
+    font-family: 'Raleway', 'sans-serif';
     font-size: 1rem;
 }
 
@@ -44,7 +45,7 @@
 .heading-date,
 .heading-time {
     margin: 1em 0;
-    font-family: "Raleway";
+    font-family: 'Raleway', 'sans-serif';
     font-size: 1.1rem;
 }
 
@@ -55,6 +56,7 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
 .checkbox-right,
@@ -71,7 +73,7 @@
 }
 
 .checkbox-label {
-    font-family: "Raleway";
+    font-family: 'Raleway', 'sans-serif';
     font-size: 1.1rem;
     position: relative;
     cursor: pointer;

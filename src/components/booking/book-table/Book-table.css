@@ -1,12 +1,15 @@
 .form-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     justify-content: center;
 }
 .book-table-form {
     width: 60%;
-    margin: 2rem 0;
+    margin: 2rem 0 4rem 0;
 }
-.book-table-form input {
+.book-table-form input,
+.book-table-form select {
     display: block;
     width: 100%;
     padding-left: 1rem;
@@ -32,7 +35,7 @@
 .gdpr {
     font-style: italic;
     font-size: .8rem;
-    margin: 1rem 0;
+    margin: 2rem 0 1rem 0;
 }
 .gdpr-link {
     color: red;
@@ -63,4 +66,8 @@
 .customer-submit:hover {
     background: #000;
     transition: 1s;
+}
+.customer-submit:disabled {
+    background: grey;
+    cursor: auto;
 }
