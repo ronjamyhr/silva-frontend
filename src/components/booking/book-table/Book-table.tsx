@@ -4,7 +4,8 @@ import axios from 'axios';
 import urlPath from '../../../config-url';
 
 interface IDateTime {
-	dateTime: IDateTimes;
+    dateTime: IDateTimes;
+    customerInfo(name: string, date: string, time: number): void;
 }
 
 export interface IDateTimes {
@@ -77,6 +78,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         // this.validateForm = this.validateForm.bind(this);
 
         this.handleOnBlur = this.handleOnBlur.bind(this);
+        this.sendBookingInfo = this.sendBookingInfo.bind(this);
     }
 
     handleInputChange(event: any) {
@@ -207,6 +209,11 @@ class BookTable extends React.Component <IDateTime, IFormData> {
 
     }
 
+    sendBookingInfo = (event: any) => {
+        this.props.customerInfo(this.state.name, this.state.date, this.state.time);
+        console.log('sendbook', this.state.name);
+    }
+
     
 
 	public render() {
@@ -238,7 +245,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                     <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
 
                     <p className="gdpr">Genom att skicka in formuläret så accepterar du <a href="#" className="gdpr-link">våra villkor kring GDPR.</a></p>
-                    <button type="submit" className="customer-submit" disabled={!this.state.isValid}>Boka bord</button>
+                    <button type="submit" className="customer-submit" onClick={this.sendBookingInfo} disabled={!this.state.isValid}>Boka bord</button>
                     {/* <span className="error-message">{this.state.invalidForm}</span> */}
                 </form>
 			</div>

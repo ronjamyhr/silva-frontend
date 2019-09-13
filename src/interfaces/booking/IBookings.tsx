@@ -10,10 +10,12 @@ export interface IBooking {
 export interface IStateBookings {
     bookings: IBooking[];
     showBooking: boolean;
+    showConfirm: boolean;
     dateAndTime: any;
+    customerDetails: any;
 }
 
 export interface IStateAdminBookings {
 	bookings: IBooking[];
-	showBooking: boolean;
+    showBooking: boolean;
 }
