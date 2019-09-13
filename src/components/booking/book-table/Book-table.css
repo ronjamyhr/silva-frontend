@@ -6,7 +6,8 @@
     width: 60%;
     margin: 2rem 0;
 }
-.book-table-form input {
+.book-table-form input,
+.book-table-form select {
     display: block;
     width: 100%;
     padding-left: 1rem;
@@ -37,6 +38,7 @@
 .gdpr-link {
     color: red;
     text-decoration: none;
+    margin-top: .5rem;
 }
 .error-message {
     color: #7F0000;
@@ -63,4 +65,8 @@
 .customer-submit:hover {
     background: #000;
     transition: 1s;
+}
+.customer-submit:disabled {
+    background: grey;
+    cursor: auto;
 }

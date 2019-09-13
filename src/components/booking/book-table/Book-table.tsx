@@ -88,6 +88,8 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             [name]: name === 'number_of_guests' ? parseInt(value) : value
         } as any);
 
+        console.log('guests', this.state.number_of_guests);
+
     }
 
     handleOnBlur(event: any) {
@@ -156,11 +158,13 @@ class BookTable extends React.Component <IDateTime, IFormData> {
         }
 
         let validForm = false;
-        if(this.state.hasErrors.email || this.state.hasErrors.name || this.state.hasErrors.phone_number) {
-            validForm = false;
-            console.log('hej', validForm);
-        } else if (!this.state.hasErrors.email && !this.state.hasErrors.name && !this.state.hasErrors.phone_number) {
+        //check for input errors
+        if (!this.state.hasErrors.email && !this.state.hasErrors.name && !this.state.hasErrors.phone_number) {
             validForm = true;
+        }
+        //check if any input field has an empty value
+        if (this.state.name === '' || this.state.email === '' || this.state.phone_number === '') {
+            validForm = false;
         }
         
         
@@ -171,14 +175,8 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             hasErrors: errors,
             isValid: validForm
         })
+
        
-        
-        // if(!this.state.hasErrors.email || !this.state.hasErrors.name || !this.state.hasErrors.phone_number) {
-        //     this.setState({
-        //         isValid: true
-        //     })
-        //     console.log('setstate', this.state.isValid);
-        // }
 
     }
 
@@ -186,14 +184,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
     submitFormInputs(event: any) {
         event.preventDefault();
 
-
-        // if (!this.state.isValid) {
-        //     // this.setState({
-        //     //     invalidForm: 'Formuläret är inte korrekt ifyllt'
-        //     // });
-
-        //     return;
-        // }
+        console.log('guests', this.state.number_of_guests);
 
 
         const customer = {
@@ -204,7 +195,6 @@ class BookTable extends React.Component <IDateTime, IFormData> {
             time: this.props.dateTime.time,
             date: this.props.dateTime.date
         };
-
 
         axios.post(`http://${urlPath}/api/booking/register-customer-book-table.php`, JSON.stringify(customer))
         .then(result => {
@@ -238,7 +228,7 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                     </div>
 
                     <div className="input-box"> 
-                        <label htmlFor="email">Mailadress</label>
+                        <label htmlFor="email">E-post</label>
                         <input type="email" name="email" id="email" value={this.state.email} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
                         <span className="error-message">{this.state.emailInputError}</span>
                     </div>
@@ -250,7 +240,15 @@ class BookTable extends React.Component <IDateTime, IFormData> {
                     </div>
 
                     <label htmlFor="guests">Hur många ska äta?</label>
-                    <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/>
+                    {/* <input type="number" name="number_of_guests" id="guests" min="1" max="6" value={this.state.number_of_guests} onChange={this.handleInputChange} onBlur={this.handleOnBlur} className="customer-input"/> */}
+                    <select name="number_of_guests" id="guests" onChange={this.handleInputChange} value={this.state.number_of_guests} className="customer-input">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
 
                     <p className="gdpr">Genom att skicka in formuläret så accepterar du <a href="#" className="gdpr-link">våra villkor kring GDPR.</a></p>
                     <button type="submit" className="customer-submit" disabled={!this.state.isValid}>Boka bord</button>
