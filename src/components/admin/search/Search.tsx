@@ -2,14 +2,13 @@ import React from 'react';
 import './Search.css';
 import { Link } from 'react-router-dom';
 
-
-interface IMapBookings {
+interface IPropsMapBookings {
     getBookings(date: string, time: number): any;
 }
 
-class Search extends React.Component<IMapBookings> {
+class Search extends React.Component<IPropsMapBookings> {
 
-    constructor(props: IMapBookings) {
+    constructor(props: IPropsMapBookings) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateDate = this.updateDate.bind(this);

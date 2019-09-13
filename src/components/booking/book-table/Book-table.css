@@ -21,6 +21,7 @@
 }
 .book-table-form label {
     display: block;
+    font-family: 'Raleway', 'sans-serif';
 }
 .valid {
     border: 1px solid green;

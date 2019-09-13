@@ -7,10 +7,13 @@ export interface IBooking {
     email_on_booking: string
 }
 
-export interface IBookings {
+export interface IStateBookings {
     bookings: IBooking[];
     showBooking: boolean;
     dateAndTime: any;
 }
 
-// export default IBookings;
+export interface IStateAdminBookings {
+	bookings: IBooking[];
+	showBooking: boolean;
+}

@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 class Home extends React.Component {
 
 	componentDidMount() {
-        window.scrollTo(0, 0)
-    }
+		window.scrollTo(0, 0)
+	}
 
 	public render() {
 		return (
@@ -18,7 +18,8 @@ class Home extends React.Component {
 				<main className="home-container">
 					<article className="about-us">
 						<h1 className="about-us-header">Om oss</h1>
-						<p className="about-us-text">Vi är den lilla restaurangen med inspiration från naturen. Vi tänker miljö och försöker förmedla det genom vår meny.
+						<p className="about-us-text">Vi är den lilla restaurangen med inspiration från naturen.</p>
+						<p className="about-us-text">Vi tänker miljö och försöker förmedla det genom vår meny.
 				Våran filosofi är att ta vara på och att använda oss av det som finns nära.</p>
 					</article>
 					<section className="image-quote-section">
@@ -32,7 +33,8 @@ class Home extends React.Component {
 					</section>
 					<article className="about-menu">
 						<h2 className="about-menu-header">Vår meny</h2>
-						<p className="about-menu-text">Vår meny varieras efter årstid. De bästa råvarona efter säsong och såklart finns det något för alla. Vår avsmakningsmeny beståd av tio mindre rätter som köksmästaren satt ihop på ett helt fantastiskt sätt.</p>
+						<p className="about-menu-text">Vår meny varieras efter årstid. De bästa råvarona efter säsong och såklart finns det något för alla. </p>
+						<p className="about-menu-text"> Vår avsmakningsmeny beståd av tio mindre rätter som köksmästaren satt ihop på ett helt fantastiskt sätt.</p>
 						<Link className="menu-link" to="/menu">Se vår meny här</Link>
 					</article>
 					<section className="gallery-quote-section">
@@ -57,7 +59,8 @@ class Home extends React.Component {
 					</section>
 					<article className="about-booking">
 						<h2 className="about-booking-header">Boka bord</h2>
-						<p className="about-booking-text">Bokning görs lättast från länken men det går också bra att ringa oss för bokning.</p>
+						<p className="about-booking-text">Bokning görs lättast online, om ni är fler än 6 personer ring oss gärna för att boka.</p>
+						<p className="about-booking-text">+46 123 456</p>
 						<Link className="booking-link" to="/booking">Boka ditt bord här</Link>
 					</article>
 					<section className="image-large-section">

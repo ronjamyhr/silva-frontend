@@ -34,11 +34,11 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    height: 300px;
+    height: 350px;
 }
 
 .about-us-header {
-    padding-top: 1em;
+    padding: 1em 0 .2em 0;
     text-align: center;
 }
 
@@ -95,8 +95,8 @@
 .about-menu-header,
 .about-booking-header {
     font-size: 2rem;
-    padding-top: 1em;
     text-align: center;
+    padding: 1em 0 .2em 0;
 }
 
 .menu-link,

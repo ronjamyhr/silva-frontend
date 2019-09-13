@@ -4,15 +4,24 @@ import SearchDate from './search-date/Search-date';
 import axios from 'axios';
 import BookTable from './book-table/Book-table';
 import urlPath from '../../config-url';
-import { IBookings } from './interfaces/IBookings';
+import { IStateBookings } from '../../interfaces/booking/IBookings';
 
-class Booking extends React.Component<{}, IBookings> {
+class Booking extends React.Component<{}, IStateBookings> {
 
     constructor(props: any) {
         super(props);
 
         this.state = {
-            bookings: [],
+            bookings: [
+                {
+                    booking_id: 0,
+                    booking_date: '',
+                    sitting_time: 0,
+                    number_of_guests_at_table: 0,
+                    name_on_booking: '',
+                    email_on_booking: ''
+                }
+            ],
             showBooking: false,
             dateAndTime: {
                 time: 0,
@@ -32,7 +41,7 @@ class Booking extends React.Component<{}, IBookings> {
 
     // get all bookings from db
     getBookings() {
-        axios.get(`http://${urlPath}/booking/get-bookings.php`)
+        axios.get(`http://${urlPath}/api/booking/get-bookings.php`)
             .then((result: any) => {
                 this.setState({
                     bookings: result.data
