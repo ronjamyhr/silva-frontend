@@ -1,0 +1,45 @@
+.header-contact {
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    background-image: url('./../../images/contact.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+    color: white;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+}
+
+.heading-contact {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.contact-container {
+    padding: 5em;
+}
+
+.small-header-contact {
+    padding: 2em 0 0.5em 0;
+}
+
+.facebook-icon,
+.instagram-icon {
+    color: #2d3f4d;
+    font-size: 1.5rem;
+    margin: 0.2em;
+}
+
+.facebook-icon:hover,
+.instagram-icon:hover {
+    color: #1c2329;
+    opacity: 0.8;
+}

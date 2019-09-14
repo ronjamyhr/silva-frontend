@@ -1,0 +1,109 @@
+.container-search {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 2em;
+    text-align: center;
+}
+
+.calendar .react-calendar {
+    font-family: 'Raleway', 'sans-serif';
+    margin: 0 auto;
+    border: 1px solid lightgrey;
+    margin-bottom: 3rem;
+}
+
+.calendar .react-calendar__tile--active,
+.calendar .react-calendar__tile--active:enabled:focus {
+    background: #2d3f4d;
+}
+
+.calendar .react-calendar__tile--active:enabled:hover {
+    background: darkgray;
+}
+
+.calendar .react-calendar__navigation__label {
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 1rem;
+}
+
+.calendar abbr[title] {
+    text-decoration: none;
+}
+
+.calendar .react-calendar__month-view__weekdays {
+    text-transform: none;
+}
+
+.heading-date,
+.heading-time {
+    margin: 1em 0;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 1.1rem;
+}
+
+.checkbox-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.checkbox-right,
+.checkbox-left {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.checkbox-label {
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 1.1rem;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid lightgray;
+}
+
+.checkbox-label:hover {
+    background: #2d3f4d;
+    color: white;
+    -webkit-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    border: 1px solid black;
+}
+
+.checkbox-left label,
+.checkbox-right label,
+input[type="checkbox"] {
+    margin: 1rem .5rem .5rem .5rem;
+}
+
+::-webkit-datetime-edit {
+    padding: .5rem;
+}
+
+.checkbox-label [type="checkbox"] {
+    display: none;
+}
+
+[type="checkbox"]+span {
+    display: inline-block;
+    padding: 1em 2em;
+}

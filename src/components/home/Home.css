@@ -1,0 +1,234 @@
+.header-home {
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    background-image: url('./../../images/home.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 1%;
+    position: relative;
+    text-align: center;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+}
+
+.big-logo {
+    display: none;
+}
+
+.home-container {
+    min-height: 500px;
+}
+
+.about-us,
+.about-menu,
+.about-booking {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 350px;
+}
+
+.about-us-header {
+    padding: 1em 0 .2em 0;
+    text-align: center;
+}
+
+.about-us-text,
+.about-menu-text,
+.about-booking-text {
+    text-align: center;
+    padding: 0.5em 3em 0.5em 3em;
+    width: 300px;
+}
+
+.image-quote-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 300px;
+    width: 100vw;
+    max-width: 100%;
+    background-color: #2d3f4d;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+}
+
+.image-small-section {
+    width: 50%;
+    overflow: hidden;
+}
+
+.quote-section {
+    width: 50%;
+}
+
+.small-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.quote-image {
+    width: 60%;
+    font-style: italic;
+    color: #ffffff;
+    opacity: 0.5;
+    font-size: 0.8rem;
+    padding: 2em 0 0 2em;
+}
+
+.about-menu-header,
+.about-booking-header {
+    font-size: 2rem;
+    text-align: center;
+    padding: 1em 0 .2em 0;
+}
+
+.menu-link,
+.booking-link {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: #1c2329;
+    font-family: 'Raleway', 'sans-serif';
+    font-weight: 400;
+    padding-top: 2em;
+}
+
+.menu-link:hover,
+.booking-link:hover {
+    color: #2d3f4d;
+    text-decoration: underline;
+}
+
+.gallery-section {
+    height: 300px;
+    width: 100vw;
+    max-width: 100%;
+    background-color: #2d3631;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+}
+
+.gallery-item {
+    width: 120px;
+    height: 120px;
+    margin: 0.2em;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.gallery-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.image-large-section {
+    height: 300px;
+    width: 100vw;
+    max-width: 100%;
+    -webkit-box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.image-large {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+
+    .big-logo {
+        display: block;
+        position: absolute;
+        top: 14%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 180px;
+    }
+
+    .gallery-item {
+        width: 200px;
+        height: 200px;
+    }
+
+}
+
+@media (min-width: 992px) {
+
+    .big-logo {
+        top: 17%;
+        width: 250px;
+    }
+
+    .about-us,
+    .about-menu,
+    .about-booking {
+        height: 350px;
+    }
+
+
+    .about-menu-header,
+    .about-booking-header {
+        padding-top: 2em;
+    }
+
+    .about-us-text,
+    .about-menu-text,
+    .about-booking-text {
+        width: 400px;
+        font-size: 1.1rem;
+    }
+
+    .image-quote-section,
+    .gallery-section,
+    .image-large-section {
+        height: 400px;
+    }
+
+    .quote-image {
+        font-size: 1.2rem;
+    }
+
+
+    .gallery-item {
+        width: 250px;
+        height: 250px;
+    }
+}

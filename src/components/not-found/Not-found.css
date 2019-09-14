@@ -1,0 +1,45 @@
+.not-found-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100vh;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.not-found-icon-container {
+    text-align: center;
+}
+
+.not-found-icon {
+    color: darkred;
+    font-size: 10rem;
+    opacity: 0.5;
+    margin-bottom: .5em;
+}
+
+.not-found-text-container {
+    text-align: center;
+}
+
+.not-found-text {
+    font-size: 1.1rem;
+    margin-bottom: 1em;
+}
+
+.not-found-home-link {
+    text-decoration: none;
+    color: #1c2329;
+    font-family: Raleway;
+    font-weight: 400;
+}
+
+.not-found-home-link:hover {
+    color: #2d3f4d;
+    text-decoration: underline;
+}

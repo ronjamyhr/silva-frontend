@@ -1,0 +1,63 @@
+.admin-bookings-container {
+    margin: 2em;
+}
+
+.admin-update-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.admin-update-form label {
+    font-family: Raleway;
+    font-size: 0.9rem;
+    padding: .5em 0;
+}
+
+.admin-update-form input[type="date"i],
+.admin-update-form input {
+    font-family: Raleway;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: .4em;
+    width: 150px;
+}
+
+.admin-bookings-list {
+    margin: 2em 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+.admin-costumer-name,
+.admin-costumer-mail {
+    padding-bottom: .5em;
+    font-weight: 800;
+}
+
+.admin-delete-button,
+.admin-update-button {
+    font-size: 0.9rem;
+    font-family: Raleway;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    padding: .5em 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 1em 1em 2em 0;
+}
+
+.admin-delete-button {
+    background-color: darkred;
+    opacity: .8;
+}
+
+.admin-update-button {
+    background-color: #2d3f4d;
+}
